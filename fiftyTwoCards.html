@@ -14,15 +14,23 @@
 
     <script>
 
-        let deck = getCards()
+        let deck = getCards();
+        
         const handHolder = document.createElement("div");
         document.body.appendChild(handHolder);
         handHolder.classList.add("hand");
 
-        //way to get random card
-        let hand = []
-        hand.push(deck[Math.floor(Math.random() * 52)])
-        console.log(hand[0])
+        function getHand(handSize) {
+            let hand = [];
+            console.log("Deck before deal: ", deck);
+            //pull 7 random cards from deck and remove those from the deck 
+            for (let i = 1; i <= handSize; i++) {
+                hand.push(deck.splice(Math.floor(Math.random() * deck.length), 1) [0]);
+            }
+            console.log(hand);
+            console.log("Deck after deal: ", deck);
+            return hand;
+        }
 
         //generate deck
         function getCards() {
@@ -36,7 +44,6 @@
                     cards.push({ suit, face });
                 }
             }
-            //console.log(cards);
             return cards;
         }
 
