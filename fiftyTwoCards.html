@@ -11,6 +11,7 @@
 
 
 <body>
+    <h1>JavaScript arrays, DOM manipulation, & CSS practice project using playing cards</h1>
 
     <script>
 
@@ -39,34 +40,50 @@
                 let cardSuit = hand[i][0].suit;
                 let cardFace = hand[i][0].face;
                 let suitIcon;
-                let iconAmount;
-                //Use icon based on suit value
-                switch (cardSuit) {
-                    case 'Heart':
-                        suitIcon = '&#9829;';
-                        break;
-                    case 'Diamond':
-                        suitIcon = '&#9830;';
-                        break;
-                    case 'Spade':
-                        suitIcon = '&#9824;';
-                        break;
-                    case 'Club':
-                        suitIcon = '&#9827;';
-                        break;
-                }
-
-                const card = document.createElement("div");
-                card.classList.add("card", cardSuit);
+                /*               //Use of icon based on suit value
+                                switch (cardSuit) {
+                                    case 'Heart':
+                                        suitIcon = '&#9829;';
+                                        break;
+                                    case 'Diamond':
+                                        suitIcon = '&#9830;';
+                                        break;
+                                    case 'Spade':
+                                        suitIcon = '&#9824;';
+                                        break;
+                                    case 'Club':
+                                        suitIcon = '&#9827;';
+                                        break;
+                                } */
                 const button = document.createElement("button");
-                button.innerText = "New Card"
-                button.classList.add("newCard");
+                const card = document.createElement("div");
                 const cardHolder = document.createElement("div");
-                cardHolder.classList.add("cardHolder");
                 //render Face card
                 let cardRender = (suit, face) => {
-                    suit = cardSuit;
-                    face = cardFace
+                    card.classList.remove('Heart', 'Diamond', 'Spade', 'Club');
+                    card.classList.add("card", cardSuit);
+                    button.innerText = "New Card"
+                    button.classList.add("newCard");
+                    cardHolder.classList.add("cardHolder");
+                    cardSuit = suit;
+                    cardFace = face;
+
+                    //Use of icon based on suit value
+                    switch (cardSuit) {
+                        case 'Heart':
+                            suitIcon = '&#9829;';
+                            break;
+                        case 'Diamond':
+                            suitIcon = '&#9830;';
+                            break;
+                        case 'Spade':
+                            suitIcon = '&#9824;';
+                            break;
+                        case 'Club':
+                            suitIcon = '&#9827;';
+                            break;
+                    }
+
                     if (cardFace === 'A' || cardFace === 'K' || cardFace === 'Q' || cardFace === 'J') {
                         card.innerHTML =
                             `<div class="card-value-suit top"> <span>${cardFace}</span> <span>${suitIcon}</span></div>
@@ -92,15 +109,21 @@
                     cardHolder.appendChild(button);
                     handHolder.appendChild(cardHolder);
                 }
+
                 cardRender(cardSuit, cardFace);
                 //button click will remove related card and push new card into hand, removed card is pushed back into deck.
                 button.addEventListener('click', () => {
-                    let newCard = getHand(1);
-                    cardSuit = newCard[0][0].suit;
-                    cardFace = newCard[0][0].face;
-                    hand.splice(hand[i], 1, newCard[0])
+                    card.remove
+                    let getNewCard = getHand(1);
+                    cardSuit = getNewCard[0][0].suit;
+                    cardFace = getNewCard[0][0].face;
+                    let newCard = { cardSuit, cardFace }
                     deck.push(hand[i][0])
-                    cardRender(cardSuit, cardFace);
+                    console.log(newCard)
+                    hand.splice(hand[i][0], 1, newCard);
+
+                    console.log(getNewCard[0][0].suit, getNewCard[0][0].face)
+                    cardRender(getNewCard[0][0].suit, getNewCard[0][0].face);
                 })
             }
         }
@@ -108,7 +131,7 @@
         function getHand(handSize) {
             let hand = [];
             //pull 7 random cards from deck and remove those from the deck 
-            for (let i = 1; i <= handSize; i++) {
+            for (let i = 0; i < handSize; i++) {
                 //splice 1 randomly selected card and push to hand array
                 hand.push(deck.splice(Math.floor(Math.random() * deck.length), 1));
             }
