@@ -36,29 +36,15 @@
             const handHolder = document.createElement("div");
             document.body.appendChild(handHolder);
             handHolder.classList.add("hand");
+            //populate handholder div with cards from hand array
             for (let i = 0; i < hand.length; i++) {
                 let cardSuit = hand[i][0].suit;
                 let cardFace = hand[i][0].face;
                 let suitIcon;
-                /*               //Use of icon based on suit value
-                                switch (cardSuit) {
-                                    case 'Heart':
-                                        suitIcon = '&#9829;';
-                                        break;
-                                    case 'Diamond':
-                                        suitIcon = '&#9830;';
-                                        break;
-                                    case 'Spade':
-                                        suitIcon = '&#9824;';
-                                        break;
-                                    case 'Club':
-                                        suitIcon = '&#9827;';
-                                        break;
-                                } */
                 const button = document.createElement("button");
                 const card = document.createElement("div");
                 const cardHolder = document.createElement("div");
-                //render Face card
+                //card render function 
                 let cardRender = (suit, face) => {
                     card.classList.remove('Heart', 'Diamond', 'Spade', 'Club');
                     card.classList.add("card", cardSuit);
@@ -67,7 +53,6 @@
                     cardHolder.classList.add("cardHolder");
                     cardSuit = suit;
                     cardFace = face;
-
                     //Use of icon based on suit value
                     switch (cardSuit) {
                         case 'Heart':
@@ -83,7 +68,7 @@
                             suitIcon = '&#9827;';
                             break;
                     }
-
+                    //render Face card
                     if (cardFace === 'A' || cardFace === 'K' || cardFace === 'Q' || cardFace === 'J') {
                         card.innerHTML =
                             `<div class="card-value-suit top"> <span>${cardFace}</span> <span>${suitIcon}</span></div>
@@ -96,7 +81,7 @@
                         suitDisp.classList.add("card-suit");
                         //top of card
                         card.innerHTML = `<div class="card-value-suit top"> <span>${cardFace}</span> <span>${suitIcon}</span></div>`;
-                        //add each icon to icon holder div
+                        //add icons to icon holder div based on card value
                         for (let i = 0; i < Number(cardFace); i++) {
                             suitDisp.innerHTML += `<span>${suitIcon}</span>`;
                         };
