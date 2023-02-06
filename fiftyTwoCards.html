@@ -113,16 +113,12 @@
                 cardRender(cardSuit, cardFace);
                 //button click will remove related card and push new card into hand, removed card is pushed back into deck.
                 button.addEventListener('click', () => {
-                    card.remove
                     let getNewCard = getHand(1);
                     cardSuit = getNewCard[0][0].suit;
                     cardFace = getNewCard[0][0].face;
-                    let newCard = { cardSuit, cardFace }
-                    deck.push(hand[i][0])
-                    console.log(newCard)
+                    let newCard = { cardSuit, cardFace };
+                    deck.push(hand[i][0]);
                     hand.splice(hand[i][0], 1, newCard);
-
-                    console.log(getNewCard[0][0].suit, getNewCard[0][0].face)
                     cardRender(getNewCard[0][0].suit, getNewCard[0][0].face);
                 })
             }
