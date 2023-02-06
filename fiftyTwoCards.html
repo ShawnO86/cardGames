@@ -30,9 +30,6 @@
             }
         }
 
-        /*          function renderCard(suit, face) {
-                 TO DO
-                 } */
         //card display
         function updateUI(hand) {
             const handHolder = document.createElement("div");
@@ -96,7 +93,7 @@
                     handHolder.appendChild(cardHolder);
                 }
                 cardRender(cardSuit, cardFace);
-                //button click will remove related card and push new card into hand, removed is card pushed back to deck.
+                //button click will remove related card and push new card into hand, removed card is pushed back into deck.
                 button.addEventListener('click', () => {
                     let newCard = getHand(1);
                     cardSuit = newCard[0][0].suit;
