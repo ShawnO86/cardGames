@@ -24,14 +24,15 @@
                     let playerDiv = document.createElement("div");
                     document.body.appendChild(playerDiv);
                     playerDiv.classList.add("Player");
-                    playerDiv.innerHTML = `Player: ${i}` 
+                    playerDiv.innerHTML = `Player: ${i}`
                     updateUI(getHand(handSize));
                 }
-            }}
-        
-   /*          function renderCard(suit, face) {
-            TO DO
-            } */
+            }
+        }
+
+        /*          function renderCard(suit, face) {
+                 TO DO
+                 } */
         //card display
         function updateUI(hand) {
             const handHolder = document.createElement("div");
@@ -66,36 +67,43 @@
                 const cardHolder = document.createElement("div");
                 cardHolder.classList.add("cardHolder");
                 //render Face card
-                if (cardFace === 'A' || cardFace === 'K' || cardFace === 'Q' || cardFace === 'J') {
-                    card.innerHTML =
-                        `<div class="card-value-suit top"> <span>${cardFace}</span> <span>${suitIcon}</span></div>
+                let cardRender = (suit, face) => {
+                    suit = cardSuit;
+                    face = cardFace
+                    if (cardFace === 'A' || cardFace === 'K' || cardFace === 'Q' || cardFace === 'J') {
+                        card.innerHTML =
+                            `<div class="card-value-suit top"> <span>${cardFace}</span> <span>${suitIcon}</span></div>
                     <div class="card-suit"> ${cardFace} </div>
                     <div class="card-value-suit bot"> <span>${cardFace}</span> <span>${suitIcon}</span></div>`;
-                    cardHolder.appendChild(card)
-                } else {
-                    //render Number card with amount of icons based on value
-                    const suitDisp = document.createElement("div");
-                    suitDisp.classList.add("card-suit");
-                    //top of card
-                    card.innerHTML = `<div class="card-value-suit top"> <span>${cardFace}</span> <span>${suitIcon}</span></div>`;
-                    //add each icon to icon holder div
-                    for (let i = 0; i < Number(cardFace); i++) {
-                        suitDisp.innerHTML += `<span>${suitIcon}</span>`;
-                    };
-                    //append icons to middle of card
-                    card.appendChild(suitDisp);
-                    //bottom of card
-                    card.innerHTML += `<div class="card-value-suit bot"> <span>${cardFace}</span> <span>${suitIcon}</span></div>`;
-                    cardHolder.appendChild(card)
+                        cardHolder.appendChild(card)
+                    } else {
+                        //render Number card with amount of icons based on value
+                        const suitDisp = document.createElement("div");
+                        suitDisp.classList.add("card-suit");
+                        //top of card
+                        card.innerHTML = `<div class="card-value-suit top"> <span>${cardFace}</span> <span>${suitIcon}</span></div>`;
+                        //add each icon to icon holder div
+                        for (let i = 0; i < Number(cardFace); i++) {
+                            suitDisp.innerHTML += `<span>${suitIcon}</span>`;
+                        };
+                        //append icons to middle of card
+                        card.appendChild(suitDisp);
+                        //bottom of card
+                        card.innerHTML += `<div class="card-value-suit bot"> <span>${cardFace}</span> <span>${suitIcon}</span></div>`;
+                        cardHolder.appendChild(card)
+                    }
+                    cardHolder.appendChild(button);
+                    handHolder.appendChild(cardHolder);
                 }
-                cardHolder.appendChild(button);
-                handHolder.appendChild(cardHolder);
-
+                cardRender(cardSuit, cardFace);
+                //button click will remove related card and push new card into hand, removed is card pushed back to deck.
                 button.addEventListener('click', () => {
                     let newCard = getHand(1);
-                    console.log(newCard[0][0].suit, newCard[0][0].face)
                     cardSuit = newCard[0][0].suit;
                     cardFace = newCard[0][0].face;
+                    hand.splice(hand[i], 1, newCard[0])
+                    deck.push(hand[i][0])
+                    cardRender(cardSuit, cardFace);
                 })
             }
         }
