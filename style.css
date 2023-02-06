@@ -1,3 +1,8 @@
+main {
+    width: 80vw;
+    margin: auto;
+}
+
 .card {
     width: 220px;
     height: 300px;
@@ -49,8 +54,7 @@
 .hand {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
-    margin: 1rem 0 3rem 0;
+    margin: 1rem;
 }
 
 .newCard {
