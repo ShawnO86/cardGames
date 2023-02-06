@@ -1,13 +1,12 @@
 .card {
-    width: calc(3vw + 105px);
-    height: calc(3vw + 150px);
+    width: 220px;
+    height: 300px;
     border-radius: 5px;
     border: 1px solid #ccc;
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
 }
 
 .card-value-suit {
@@ -29,9 +28,12 @@
 } 
 
 .card-suit {
-    font-size: 50px;
-    display: inline-block;
+    font-size: 42px;
+    display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 16px 38px;
+    gap: 5px;
 } 
 
 .card.Spade,
@@ -52,6 +54,5 @@
 }
 
 .newCard {
-    position: relative;
-    top: 50%;
+    display:inline-block;
 }
