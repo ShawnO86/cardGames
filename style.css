@@ -1,0 +1,57 @@
+.card {
+    width: calc(3vw + 105px);
+    height: calc(3vw + 150px);
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.card-value-suit {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    font-size: 28px;
+}
+
+.card-value-suit.top {
+    border-radius: 5px 5px 0 0;
+    background-color:rgb(230, 230, 230);
+}
+
+.card-value-suit.bot {
+    transform: rotate(180deg);
+    border-radius: 5px 5px 0 0;
+    background-color:rgb(230, 230, 230);
+} 
+
+.card-suit {
+    font-size: 50px;
+    display: inline-block;
+    flex-wrap: wrap;
+} 
+
+.card.Spade,
+.card.Club {
+    color: black;
+}
+
+.card.Heart,
+.card.Diamond {
+    color: red;
+}
+
+.hand {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem 0 3rem 0;
+}
+
+.newCard {
+    position: relative;
+    top: 50%;
+}

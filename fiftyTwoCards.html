@@ -15,17 +15,62 @@
     <script>
 
         let deck = getCards();
-        
-        const handHolder = document.createElement("div");
-        document.body.appendChild(handHolder);
-        handHolder.classList.add("hand");
+
+        function deal(players, handSize) {
+            if (players > 4) {
+                alert("Up to 4 players only.");
+            } else {
+                for (let i = 1; i <= players; i++) {
+                    updateUI(getHand(handSize));
+                }
+            }
+        }
+
+        //card display
+        function updateUI(hand) {
+            const handHolder = document.createElement("div");
+            document.body.appendChild(handHolder);
+            handHolder.classList.add("hand");
+            for (let i = 0; i < hand.length; i++) {
+                const cardSuit = hand[i][0].suit;
+                const cardFace = hand[i][0].face;
+                let suitIcon;
+                let iconAmount;
+                switch (cardSuit) {
+                    case 'Heart':
+                        suitIcon = '&#9829;';
+                        break;
+                    case 'Diamond':
+                        suitIcon = '&#9830;';
+                        break;
+                    case 'Spade':
+                        suitIcon = '&#9824;';
+                        break;
+                    case 'Club':
+                        suitIcon = '&#9827;';
+                        break;
+                }
+
+                const card = document.createElement("div");
+                card.classList.add("card", cardSuit);
+                card.innerHTML =
+                    `<div class="card-value-suit top"> <span>${cardFace}</span> <span>${suitIcon}</span></div>
+                    <div class="card-suit"> ${cardFace} </div>
+                    <div class="card-value-suit bot"> <span>${cardFace}</span> <span>${suitIcon}</span></div>`
+
+  
+
+                handHolder.appendChild(card);
+            }
+        }
 
         function getHand(handSize) {
             let hand = [];
             console.log("Deck before deal: ", deck);
             //pull 7 random cards from deck and remove those from the deck 
             for (let i = 1; i <= handSize; i++) {
-                hand.push(deck.splice(Math.floor(Math.random() * deck.length), 1) [0]);
+                //splice 1 randomly selected card and push to hand array
+                hand.push(deck.splice(Math.floor(Math.random() * deck.length), 1));
             }
             console.log(hand);
             console.log("Deck after deal: ", deck);
@@ -46,6 +91,8 @@
             }
             return cards;
         }
+
+        deal(2, 7);
 
     </script>
 </body>
