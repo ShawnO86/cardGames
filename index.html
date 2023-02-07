@@ -34,7 +34,11 @@
                 let playerDiv = document.createElement("div");
                 main.appendChild(playerDiv);
                 playerDiv.classList.add("player");
-                playerDiv.innerHTML = `Player: ${i}`
+                playerDiv.innerHTML = "Dealer";
+                if (i == 2) {
+                    playerDiv.innerHTML = "Player"
+                }
+
                 updateUI(getHand(handSize));
             }
         }

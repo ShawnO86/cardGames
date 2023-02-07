@@ -1,6 +1,7 @@
 body {
     text-align: center;
 }
+
 main {
     margin: auto;
     width: fit-content;
@@ -56,7 +57,7 @@ main {
 }
 
 .hand {
-    display:flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: left;
 }
@@ -75,9 +76,13 @@ main {
 
 .player {
     text-align: center;
-    background-color: #ccc;
-    margin: 1rem 0 5px 0 ;
+    background-color: #333;
+    color: #fff;
+    margin: 1rem 0 5px 0;
     padding: 1rem;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1.25rem;
 }
 
 button.newCard {
