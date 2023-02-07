@@ -27,5 +27,7 @@ To Do:
 
 -Add a win animation.
 
+-Slow down speed at which you can click new cards - maybe unable to click new card if animation is playing?
+
 -???
 
