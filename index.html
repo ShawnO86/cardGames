@@ -115,12 +115,20 @@
                     card.classList.remove('in_animation')
                     setTimeout(() => {
                         let getNewCard = getHand(1);
-                        cardSuit = getNewCard[0][0].suit;
-                        cardFace = getNewCard[0][0].face;
-                        let newCard = { cardSuit, cardFace };
-                        deck.push(hand[i][0]);
-                        hand.splice(hand[i][0], 1, newCard);
-                        cardRender(getNewCard[0][0].suit, getNewCard[0][0].face);
+                        let newHand = [...hand];
+                        suit = getNewCard[0][0].suit;
+                        face = getNewCard[0][0].face;
+                        let newCard = [{ suit, face }];
+                        console.log("newcard", newCard)
+/*                         deck.push(newHand[i - 1]);
+                        newHand.splice([i - 1], 1);
+                        newHand.push(newCard)
+                        console.log("hand", newHand)
+                        console.log("removed card", newHand[i - 1]) */
+                        //console.log(deck)
+                        
+                        console.log("hand", newHand)
+                        updateUI(hand);
                     }, 300)
 
                 })
