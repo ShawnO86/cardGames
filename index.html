@@ -12,10 +12,21 @@
 
 <body>
     <h1>JavaScript arrays, DOM manipulation, & CSS practice project using playing cards</h1>
-
+    <h2>( work in progress )</h2>
+    <button class="deal">Deal Cards</button>
     <script>
 
         let deck = getCards();
+        const main = document.createElement("main");
+        document.querySelector('.deal').addEventListener("click", () => {
+            document.body.appendChild(main);
+            main.innerHTML = ''
+            deck = getCards();
+            deal(2, 7);
+            main.scrollIntoView({          
+                block: "start",
+            behavior: "smooth"})
+        })
 
         function deal(players, handSize) {
             if (players > 4) {
@@ -23,7 +34,7 @@
             } else {
                 for (let i = 1; i <= players; i++) {
                     let playerDiv = document.createElement("div");
-                    document.body.appendChild(playerDiv);
+                    main.appendChild(playerDiv);
                     playerDiv.classList.add("player");
                     playerDiv.innerHTML = `Player: ${i}`
                     updateUI(getHand(handSize));
@@ -34,7 +45,7 @@
         //card display
         function updateUI(hand) {
             const handHolder = document.createElement("div");
-            document.body.appendChild(handHolder);
+            main.appendChild(handHolder);
             handHolder.classList.add("hand");
             //populate handholder div with cards from hand array
             for (let i = 0; i < hand.length; i++) {
@@ -100,7 +111,7 @@
                 //button click will remove related card and push new card into hand, removed card is pushed back into deck.
                 button.addEventListener('click', () => {
                     cardHolder.classList.add('out_animation');
-
+                    card.classList.remove('in_animation')
                     setTimeout(() => {
                         let getNewCard = getHand(1);
                         cardSuit = getNewCard[0][0].suit;
@@ -109,8 +120,8 @@
                         deck.push(hand[i][0]);
                         hand.splice(hand[i][0], 1, newCard);
                         cardRender(getNewCard[0][0].suit, getNewCard[0][0].face);
-                        card.classList.remove('in_animation')
-                    }, 450)
+
+                    }, 300)
 
                 })
             }
@@ -142,8 +153,6 @@
             }
             return cards;
         }
-
-        deal(2, 7);
 
     </script>
 </body>

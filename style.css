@@ -1,6 +1,14 @@
+body {
+    text-align: center;
+}
+main {
+    margin: auto;
+    width: fit-content;
+}
+
 .card {
-    width: 220px;
-    height: 300px;
+    width: 200px;
+    height: 280px;
     border-radius: 5px;
     border: 1px solid #ccc;
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
@@ -13,6 +21,7 @@
     display: block;
     padding: 5px;
     font-size: 1.5rem;
+    text-align: left;
 }
 
 .card-value-suit.top {
@@ -33,6 +42,7 @@
     justify-content: space-around;
     padding: 16px 38px;
     gap: 5px;
+
 }
 
 .card.Spade,
@@ -46,9 +56,17 @@
 }
 
 .hand {
-    display: flex;
-    justify-content: left;
+    display:flex;
     flex-wrap: wrap;
+    justify-content: left;
+}
+
+.hand:last-of-type {
+    margin-bottom: 5rem;
+}
+
+.cardHolder {
+    margin: 5px;
 }
 
 .newCard {
@@ -58,37 +76,63 @@
 .player {
     text-align: center;
     background-color: #ccc;
-    margin: 2rem 0;
+    margin: 1rem 0 5px 0 ;
     padding: 1rem;
 }
 
+button.newCard {
+    width: 99%;
+    padding: 10px;
+    margin-top: 5px;
+    white-space: nowrap;
+    animation: animated-card-in 300ms ease-in 50ms forwards;
+    opacity: 0;
+}
+
+button.deal {
+    width: 12rem;
+    padding: 10px;
+}
+
 .out_animation {
-    animation: animated-card-out 300ms ease-in 100ms forwards;
+    animation: animated-card-out 200ms ease-in 0ms forwards;
 }
 
 .in_animation {
-    animation: animated-card-in 300ms ease-in 100ms;
+    opacity: 0;
+    animation: animated-card-in 300ms ease-in 0ms forwards;
 }
 
 @keyframes animated-card-out {
-    from {
+    0% {
         width: 220px;
         opacity: 1;
+        margin: 0;
+
     }
 
-    to {
+    100% {
         width: 0px;
+        margin: -2rem 0 0 0;
         opacity: 0;
     }
 }
 
 @keyframes animated-card-in {
-    from {
+    0% {
+        overflow: hidden;
+        white-space: nowrap;
         width: 0px;
         opacity: 0;
     }
 
-    to {
+    60% {
+        opacity: 0;
+    }
+
+    100% {
+        overflow: visible;
+        white-space: normal;
         width: 220px;
         opacity: 1;
     }
