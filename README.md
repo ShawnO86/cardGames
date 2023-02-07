@@ -18,6 +18,7 @@ Each card in the hand array is able to be traded out for another in the deck arr
 As the cards are switched out an animation will play that shows the removed card leaving the hand and the new card entering.
 
 To Do:
+
 -Add face card images.
 
 -Hide dealer cards.
