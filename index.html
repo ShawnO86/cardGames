@@ -23,22 +23,19 @@
             main.innerHTML = ''
             deck = getCards();
             deal(2, 7);
-            main.scrollIntoView({          
+            main.scrollIntoView({
                 block: "start",
-            behavior: "smooth"})
+                behavior: "smooth"
+            })
         })
 
         function deal(players, handSize) {
-            if (players > 4) {
-                alert("Up to 4 players only.");
-            } else {
-                for (let i = 1; i <= players; i++) {
-                    let playerDiv = document.createElement("div");
-                    main.appendChild(playerDiv);
-                    playerDiv.classList.add("player");
-                    playerDiv.innerHTML = `Player: ${i}`
-                    updateUI(getHand(handSize));
-                }
+            for (let i = 1; i <= players; i++) {
+                let playerDiv = document.createElement("div");
+                main.appendChild(playerDiv);
+                playerDiv.classList.add("player");
+                playerDiv.innerHTML = `Player: ${i}`
+                updateUI(getHand(handSize));
             }
         }
 
@@ -120,7 +117,6 @@
                         deck.push(hand[i][0]);
                         hand.splice(hand[i][0], 1, newCard);
                         cardRender(getNewCard[0][0].suit, getNewCard[0][0].face);
-
                     }, 300)
 
                 })
@@ -153,6 +149,5 @@
             }
             return cards;
         }
-
     </script>
 </body>
