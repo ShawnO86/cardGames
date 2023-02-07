@@ -16,3 +16,18 @@ The 5 has 5 icons 10 has 10 icons ect... Face cards are represented by their fir
 Each card in the hand array is able to be traded out for another in the deck array with the click of a button. As they are traded out, they are swaped from hand array to deck array and vise versa using .splice() and .push().
 
 As the cards are switched out an animation will play that shows the removed card leaving the hand and the new card entering.
+
+To Do:
+
+-Add face card images.
+
+-Hide dealer cards.
+
+-Create scoring system.
+
+-Add a win animation.
+
+-Slow down speed at which you can click new cards - maybe unable to click new card if animation is playing?
+
+-???
+
