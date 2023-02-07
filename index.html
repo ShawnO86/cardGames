@@ -24,7 +24,7 @@
                 for (let i = 1; i <= players; i++) {
                     let playerDiv = document.createElement("div");
                     document.body.appendChild(playerDiv);
-                    playerDiv.classList.add("Player");
+                    playerDiv.classList.add("player");
                     playerDiv.innerHTML = `Player: ${i}`
                     updateUI(getHand(handSize));
                 }
@@ -47,10 +47,11 @@
                 //card render function 
                 let cardRender = (suit, face) => {
                     card.classList.remove('Heart', 'Diamond', 'Spade', 'Club');
-                    card.classList.add("card", cardSuit);
+                    card.classList.add("card", cardSuit, 'in_animation');
                     button.innerText = "New Card"
                     button.classList.add("newCard");
                     cardHolder.classList.add("cardHolder");
+                    cardHolder.classList.remove("out_animation");
                     cardSuit = suit;
                     cardFace = face;
                     //Use of icon based on suit value
@@ -98,13 +99,19 @@
                 cardRender(cardSuit, cardFace);
                 //button click will remove related card and push new card into hand, removed card is pushed back into deck.
                 button.addEventListener('click', () => {
-                    let getNewCard = getHand(1);
-                    cardSuit = getNewCard[0][0].suit;
-                    cardFace = getNewCard[0][0].face;
-                    let newCard = { cardSuit, cardFace };
-                    deck.push(hand[i][0]);
-                    hand.splice(hand[i][0], 1, newCard);
-                    cardRender(getNewCard[0][0].suit, getNewCard[0][0].face);
+                    cardHolder.classList.add('out_animation');
+
+                    setTimeout(() => {
+                        let getNewCard = getHand(1);
+                        cardSuit = getNewCard[0][0].suit;
+                        cardFace = getNewCard[0][0].face;
+                        let newCard = { cardSuit, cardFace };
+                        deck.push(hand[i][0]);
+                        hand.splice(hand[i][0], 1, newCard);
+                        cardRender(getNewCard[0][0].suit, getNewCard[0][0].face);
+                        card.classList.remove('in_animation')
+                    }, 450)
+
                 })
             }
         }
