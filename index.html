@@ -17,9 +17,10 @@
     <script>
 
 
-        let deck; 
+        let deck;
         const main = document.createElement("main");
         cardGame();
+
 
         function cardGame() {
             document.body.appendChild(main);
@@ -29,12 +30,15 @@
                 main.innerHTML = '';
 
                 // Deal cards to each player
-                const dealer = getHand(7);
-                const player = getHand(7);
+                let dealer = getHand(5);
+                let player = getHand(5);
 
                 console.log(dealer, player, deck)
+                
                 updateUI(dealer)
                 updateUI(player)
+
+                const newCardButtons = document.querySelectorAll('.newCard');
 
                 main.scrollIntoView({
                     block: "start",
@@ -76,39 +80,39 @@
                 const card = document.createElement("div");
                 const cardHolder = document.createElement("div");
                 //card render 
-                    card.classList.remove('H', 'D', 'S', 'C');
-                    card.classList.add("card", cardSuit, 'in_animation');
-                    button.innerText = "New Card"
-                    button.classList.add("newCard");
-                    cardHolder.classList.add("cardHolder");
-                    cardHolder.classList.remove("out_animation");
-                    //render Face card
-                    if (cardFace === 'A' || cardFace === 'K' || cardFace === 'Q' || cardFace === 'J') {
-                        card.innerHTML =
-                            `<div class="card-value-suit top"> <span>${cardFace}</span> <span>${suitIcon(cardSuit)}</span></div>
+                card.classList.remove('H', 'D', 'S', 'C');
+                card.classList.add("card", cardSuit, 'in_animation');
+                button.innerHTML = "New Card";
+                button.classList.add("newCard");
+                cardHolder.classList.add("cardHolder");
+                cardHolder.classList.remove("out_animation");
+                //render Face card
+                if (cardFace === 'A' || cardFace === 'K' || cardFace === 'Q' || cardFace === 'J') {
+                    card.innerHTML =
+                        `<div class="card-value-suit top"> <span>${cardFace}</span> <span>${suitIcon(cardSuit)}</span></div>
                     <div class="card-suit"> ${cardFace} </div>
                     <div class="card-value-suit bot"> <span>${cardFace}</span> <span>${suitIcon(cardSuit)}</span></div>`;
-                        cardHolder.appendChild(card)
-                    } else {
-                        //render Number card with amount of icons based on value
-                        const suitDisp = document.createElement("div");
-                        suitDisp.classList.add("card-suit");
-                        //top of card
-                        card.innerHTML = `<div class="card-value-suit top"> <span>${cardFace}</span> <span>${suitIcon(cardSuit)}</span></div>`;
-                        //add icons to icon holder div based on card value
-                        for (let i = 0; i < Number(cardFace); i++) {
-                            suitDisp.innerHTML += `<span>${suitIcon(cardSuit)}</span>`;
-                        };
-                        //append icons to middle of card
-                        card.appendChild(suitDisp);
-                        //bottom of card
-                        card.innerHTML += `<div class="card-value-suit bot"> <span>${cardFace}</span> <span>${suitIcon(cardSuit)}</span></div>`;
-                        cardHolder.appendChild(card)
-                    }
-                    cardHolder.appendChild(button);
-                    handHolder.appendChild(cardHolder);
+                    cardHolder.appendChild(card)
+                } else {
+                    //render Number card with amount of icons based on value
+                    const suitDisp = document.createElement("div");
+                    suitDisp.classList.add("card-suit");
+                    //top of card
+                    card.innerHTML = `<div class="card-value-suit top"> <span>${cardFace}</span> <span>${suitIcon(cardSuit)}</span></div>`;
+                    //add icons to icon holder div based on card value
+                    for (let i = 0; i < Number(cardFace); i++) {
+                        suitDisp.innerHTML += `<span>${suitIcon(cardSuit)}</span>`;
+                    };
+                    //append icons to middle of card
+                    card.appendChild(suitDisp);
+                    //bottom of card
+                    card.innerHTML += `<div class="card-value-suit bot"> <span>${cardFace}</span> <span>${suitIcon(cardSuit)}</span></div>`;
+                    cardHolder.appendChild(card)
                 }
+                cardHolder.appendChild(button);
+                handHolder.appendChild(cardHolder);
             }
+        }
 
         function getHand(handSize) {
             let hand = [];

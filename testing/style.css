@@ -1,0 +1,157 @@
+body {
+    text-align: center;
+}
+
+main {
+    margin: auto;
+    width: fit-content;
+}
+
+.card {
+    width: 200px;
+    height: 280px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-value-suit {
+    display: block;
+    padding: 5px;
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+.card-value-suit.top {
+    border-radius: 5px 5px 0 0;
+    background-color: rgb(230, 230, 230);
+}
+
+.card-value-suit.bot {
+    transform: rotate(180deg);
+    border-radius: 5px 5px 0 0;
+    background-color: rgb(230, 230, 230);
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-value-suit.bot .cardRadios {
+    transform: rotate(180deg);
+}
+
+.card-value-suit.A button {
+    position: relative;
+    left: 120px;
+    transform: rotate(180deg);
+}
+
+.card-suit {
+    font-size: 42px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 16px 38px;
+    gap: 5px;
+}
+
+.card-suit.A, .card-suit.K, .card-suit.Q, .card-suit.J {
+    font-size: 5rem;
+}
+
+.card.S, .card.C {
+    color: black;
+}
+
+.card.H, .card.D {
+    color: red;
+}
+
+.hand {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.hand:last-of-type {
+    margin-bottom: 5rem;
+}
+
+.cardHolder {
+    margin: 5px;
+}
+
+.newCard {
+    display: inline-block;
+}
+
+.player {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    margin: 1rem 0 5px 0;
+    padding: 1rem;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+button.newCard {
+    width: 99%;
+    padding: 10px;
+    margin-top: 5px;
+    white-space: nowrap;
+    animation: animated-card-in 300ms ease-in 50ms forwards;
+    opacity: 0;
+}
+
+button.deal {
+    width: 12rem;
+    padding: 10px;
+}
+
+.out_animation {
+    animation: animated-card-out 200ms ease-in 0ms forwards;
+}
+
+.in_animation {
+    opacity: 0;
+    animation: animated-card-in 300ms ease-in 0ms forwards;
+}
+
+@keyframes animated-card-out {
+    0% {
+        width: 220px;
+        opacity: 1;
+        margin: 0;
+
+    }
+
+    100% {
+        width: 0px;
+        margin: -2rem 0 0 0;
+        opacity: 0;
+    }
+}
+
+@keyframes animated-card-in {
+    0% {
+        overflow: hidden;
+        white-space: nowrap;
+        width: 0px;
+        opacity: 0;
+    }
+
+    60% {
+        opacity: 0;
+    }
+
+    100% {
+        overflow: visible;
+        white-space: normal;
+        width: 220px;
+        opacity: 1;
+    }
+}
