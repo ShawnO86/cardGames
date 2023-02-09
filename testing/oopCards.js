@@ -11,7 +11,7 @@ class Deck {
     constructor() {
         this.cards = [];
     }
-
+    //builds standard deck
     createDeck() {
         let suits = ['C', 'D', 'H', 'S'];
         let ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -24,7 +24,7 @@ class Deck {
             }
         }
     }
-
+    //builds hand
     getCards(handSize) {
         let hand = [];
         for (let i = 0; i < handSize; i++) {
@@ -48,7 +48,7 @@ class Table {
         this.players = [];
         this.deck = []
     }
-
+    //initial match
     start(playerOneName, playerTwoName) {
         this.players.push(new Player(playerOneName));
         this.players.push(new Player(playerTwoName));
@@ -58,7 +58,7 @@ class Table {
         this.players[0].playerCards = d.getCards(5);
         this.players[1].playerCards = d.getCards(5);
     }
-
+    //sum hand values
     calcTotal(hand) {
         let currentValue;
         let total = 0;
@@ -69,7 +69,7 @@ class Table {
         }
         return total
     }
-
+    //changes suit letter to corresponding icon
     suitIcon(cardSuit) {
         let suitIcon;
         switch (cardSuit) {
@@ -88,55 +88,62 @@ class Table {
         }
         return suitIcon;
     }
-
+    //renders hand to browser
     renderHand(hand, playerName) {
-        console.log(gameArea.children)
-        console.log('renderHand data:', hand.length, playerName, hand)
+        console.log(`renderHand args: Hand size: ${hand.length}, Player name: ${playerName}`)
+
         const dealerHandHolder = document.querySelector('.dealerHand')
         const playerHandHolder = document.querySelector('.playerHand')
-        if(!playerHandHolder.innerHTML == '' && !dealerHandHolder.innerHTML == '') {
+        //reset handHolders if they have content
+        if (!playerHandHolder.innerHTML == '' && !dealerHandHolder.innerHTML == '') {
             console.log('childs')
             playerHandHolder.innerHTML = '';
             dealerHandHolder.innerHTML = '';
         }
 
+        console.log('player hand:')
         for (let i = 0; i < hand.length; i++) {
-
+            //ui elements
             const cardHolder = document.createElement("div");
             const button = document.createElement("button");
             const card = document.createElement("div");
+            //build each card by suit and rank
             let cardSuit = hand[i].suit;
             let cardFace = hand[i].rank;
             button.innerHTML = "New Card";
             button.classList.add("newCard", cardSuit + cardFace, playerName);
+            console.log(cardFace, cardSuit)
 
-            console.log(cardSuit, cardFace)
             cardHolder.classList.add("cardHolder");
+            //card class reset
             card.classList.remove('H', 'D', 'S', 'C', 'A', 'K', 'Q', 'J');
             card.classList.add("card", 'in_animation');
 
             if (cardFace === 'A' || cardFace === 'K' || cardFace === 'Q' || cardFace === 'J') {
+                //set card class
                 card.classList.add(cardSuit, cardFace)
-                //face card
+                //face card render
                 card.innerHTML =
                     `<div class="card-value-suit top"> <span>${cardFace}</span> <span>${this.suitIcon(cardSuit)}</span></div>
                 <div class="card-suit ${cardFace}"> ${cardFace} </div>
                 <div class="card-value-suit bot"><span>${cardFace}</span> <span>${this.suitIcon(cardSuit)}</span></div>`;
                 cardHolder.appendChild(card);
             } else {
+                //number card render
                 const suitDisp = document.createElement("div");
+                //set card class
                 card.classList.add(cardSuit, cardFace)
                 suitDisp.classList.add("card-suit", cardFace);
                 //top of card
                 card.innerHTML = `<div class="card-value-suit top"> <span>${cardFace}</span> <span>${this.suitIcon(cardSuit)}</span></div>`;
-                
+
                 //add icons to icon holder div based on card value
                 for (let i = 0; i < Number(cardFace); i++) {
                     suitDisp.innerHTML += `<span>${this.suitIcon(cardSuit)}</span>`;
                 };
-
                 //append icons to middle of card
                 card.appendChild(suitDisp);
+
                 //bottom of card
                 card.innerHTML += `<div class="card-value-suit bot"> <span>${cardFace}</span> <span>${this.suitIcon(cardSuit)}</span></div>`;
                 cardHolder.appendChild(card)
@@ -178,6 +185,7 @@ function main() {
         //render hands to browser
         gameBoard.renderHand(playerHand, gameBoard.players[0].playerName);
         gameBoard.renderHand(dealerHand, gameBoard.players[1].playerName);
+        console.log("remaining cards in deck: ", gameBoard.deck)
     })
 }
 

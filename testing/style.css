@@ -10,19 +10,21 @@ main {
 .gameArea {
     display: grid;
     grid-template-areas: 
-    "dealer"
-    "player";
+    "player"
+    "dealer";
     gap: 2rem;
 }
 
 .playerHand {
     display: flex;
     grid-area: player;
+    margin: 2rem auto 0 auto;
 }
 
 .dealerHand {
     display: flex;
     grid-area: dealer;
+    margin: auto;
 }
 
 .card {
