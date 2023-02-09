@@ -94,6 +94,11 @@ class Table {
         console.log('renderHand data:', hand.length, playerName, hand)
         const dealerHandHolder = document.querySelector('.dealerHand')
         const playerHandHolder = document.querySelector('.playerHand')
+        if(!playerHandHolder.innerHTML == '' && !dealerHandHolder.innerHTML == '') {
+            console.log('childs')
+            playerHandHolder.innerHTML = '';
+            dealerHandHolder.innerHTML = '';
+        }
 
         for (let i = 0; i < hand.length; i++) {
 
