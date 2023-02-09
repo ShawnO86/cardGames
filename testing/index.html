@@ -16,12 +16,20 @@
     <p>Number on card = point value</p>
     <p>Face card = 10 points</p>
     <p>Ace card = 1 point or 11 points depends on total</p>
-    <button class="deal btn">Deal Cards</button>    
-    <button class="hit btn">Hit</button>
-    <button class="stay btn">Stay</button>
+    <button class="deal btn">Deal Cards</button>
+
     <div class="gameArea">
-        <div class="playerHand"></div>
-        <div class="dealerHand"></div>
+        <div class="playerArea">
+            <h3>Player</h3>
+            <div class="playerHand"></div>
+            <div class="buttonHolder">
+            <button class="hit btn">Hit</button>
+            <button class="stay btn">Stay</button>
+        </div></div>
+        <div class="dealerArea">
+            <h3>Dealer</h3>
+            <div class="dealerHand"></div>
+        </div>
     </div>
     <script src="oopCards.js"></script>
 </body>

@@ -44,12 +44,12 @@ class Player {
         this.playerName = name;
         this.playerCards = [];
     };
-
+    //give new card on hit
     addCard(card) {
         this.playerCards.push(card)
     };
 
-    //sum hand values
+    //sum hand values on stay
     calcTotal() {
         let points = 0;
         let hasAce = false;
@@ -92,7 +92,7 @@ class Table {
         console.log("deck before deal", deck)
         this.deck = deck;
         deck.shuffle();
-      //  console.log("after shuffle", this.deck)
+        //  console.log("after shuffle", this.deck)
         console.log('start:', player, dealer)
         for (let i = 0; i < handSize; i++) {
             player.addCard(deck.deal());
@@ -122,8 +122,6 @@ class Table {
 
     //renders hand to browser
     renderHand(hand, playerName) {
-        console.log(`renderHand args: Hand size: ${hand.length}, Player name: ${playerName}`)
-
         const dealerHandHolder = document.querySelector('.dealerHand')
         const playerHandHolder = document.querySelector('.playerHand')
         //reset handHolders if they already have content
@@ -137,7 +135,6 @@ class Table {
         for (let i = 0; i < hand.length; i++) {
             //ui elements
             const cardHolder = document.createElement("div");
-            const button = document.createElement("button");
             const card = document.createElement("div");
             //build each card by suit and rank
             let cardSuit = hand[i].suit;
@@ -190,20 +187,33 @@ class Table {
 
 }
 
-const gameArea = document.querySelector(".gameArea");
+
 function main() {
-
     const dealButton = document.querySelector('.deal');
+    const hitButton = document.querySelector('.hit');
+    const stayButton = document.querySelector('.stay');
+    const gameArea = document.querySelector(".gameArea");
+    const playerArea = document.querySelector(".playerArea");
+    const dealerArea = document.querySelector(".dealerArea");
+    const p = document.createElement('p');
 
+    gameArea.classList.remove('gameArea')
+    gameArea.classList.add('hiddenArea');
+    p.classList.add('scoreArea')
+    playerArea.appendChild(p)
 
+    let gameBoard;
+    let player; 
+    let dealer; 
 
     dealButton.addEventListener("click", () => {
-        let gameBoard = new Table();
+        gameArea.classList.remove('hiddenArea')
+        gameArea.classList.add('gameArea')
+        gameBoard = new Table();
         //start match
         gameBoard.start('Player', 'Dealer', 2);
-        //define starting hands
-        let player = gameBoard.players[0];
-        let dealer = gameBoard.players[1]
+        player = gameBoard.players[0];
+        dealer = gameBoard.players[1];
 
         //render hands to browser
         gameBoard.renderHand(player.playerCards, player.playerName);
@@ -211,10 +221,8 @@ function main() {
         console.log("deck after deal: ", gameBoard.deck)
         console.log(player.playerName + " hand: " + player.calcTotal())
         console.log(dealer.playerName + " hand: " + dealer.calcTotal())
-        player.addCard(gameBoard.deck.deal(gameBoard.deck))
-        console.log(player.playerName + " hand: " + player.calcTotal())
-        gameBoard.renderHand(player.playerCards, player.playerName);
-        gameBoard.renderHand(dealer.playerCards, dealer.playerName);
+        let playerScore = player.calcTotal();
+        p.innerHTML = `Your current score: ${playerScore}`
     })
 }
 

@@ -7,6 +7,10 @@ main {
     width: fit-content;
 }
 
+.hiddenArea {
+    display: none;
+}
+
 .gameArea {
     display: grid;
     grid-template-areas: 
@@ -15,16 +19,23 @@ main {
     gap: 2rem;
 }
 
-.playerHand {
-    display: flex;
+.playerArea {
     grid-area: player;
-    margin: 2rem auto 0 auto;
+    margin: 1rem auto 0 auto;
 }
 
-.dealerHand {
-    display: flex;
+.dealerArea {
     grid-area: dealer;
-    margin: auto;
+    margin: 0 auto 1rem auto;
+}
+
+.playerHand, .dealerHand {
+    display: flex;
+}
+
+.dealerHand .cardHolder:first-child .card:first-child {
+    background-color: rgb(51, 51, 51);
+    color: rgba(51, 51, 51, 0);
 }
 
 .card {
@@ -100,22 +111,10 @@ main {
     margin: 5px;
 }
 
-.newCard {
-    display: inline-block;
-}
-
-button.newCard {
-    width: 99%;
-    padding: 10px;
-    margin-top: 5px;
-    white-space: nowrap;
-    animation: animated-card-in 300ms ease-in 50ms forwards;
-    opacity: 0;
-}
-
 .btn {
     width: 12rem;
     padding: 10px;
+    margin: 1rem;
 }
 
 .out_animation {
