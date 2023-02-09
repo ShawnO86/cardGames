@@ -70,7 +70,12 @@ class Player {
                 points += 1;
             }
         }
-        return points;
+        if (points > 21) {
+            return "Bust!!!"
+        } else {
+            return points;
+        }
+
     };
 
 };
@@ -195,16 +200,18 @@ function main() {
     const gameArea = document.querySelector(".gameArea");
     const playerArea = document.querySelector(".playerArea");
     const dealerArea = document.querySelector(".dealerArea");
-    const p = document.createElement('p');
+    const playerScoreArea = document.createElement('p');
 
     gameArea.classList.remove('gameArea')
     gameArea.classList.add('hiddenArea');
-    p.classList.add('scoreArea')
-    playerArea.appendChild(p)
+    playerScoreArea.classList.add('scoreArea')
+    playerArea.appendChild(playerScoreArea)
 
     let gameBoard;
-    let player; 
-    let dealer; 
+    let player;
+    let dealer;
+    let playerScore;
+    let dealerScore;
 
     dealButton.addEventListener("click", () => {
         gameArea.classList.remove('hiddenArea')
@@ -219,11 +226,31 @@ function main() {
         gameBoard.renderHand(player.playerCards, player.playerName);
         gameBoard.renderHand(dealer.playerCards, dealer.playerName);
         console.log("deck after deal: ", gameBoard.deck)
-        console.log(player.playerName + " hand: " + player.calcTotal())
-        console.log(dealer.playerName + " hand: " + dealer.calcTotal())
-        let playerScore = player.calcTotal();
-        p.innerHTML = `Your current score: ${playerScore}`
+        playerScore = player.calcTotal();
+        dealerScore = player.calcTotal();
+        console.log(dealer.playerName + " hand score: " + dealerScore)
+        playerScoreArea.innerHTML = `Your current score: ${playerScore}`
+
+        if(playerScore == 21) {
+            playerScoreArea.innerHTML = 'Natural 21!'
+        }
+    })
+
+    hitButton.addEventListener("click", () => {
+        player.addCard(gameBoard.deck.deal())
+        playerScore = player.calcTotal();
+
+        console.log(player)
+        gameBoard.renderHand(player.playerCards, player.playerName);
+        gameBoard.renderHand(dealer.playerCards, dealer.playerName);
+
+        playerScoreArea.innerHTML = `Your current score: ${playerScore}`
+
+        if(playerScore === 21) {
+            playerScoreArea.innerHTML = 'Blackjack 21! - Stay'
+        }
     })
 }
+
 
 main()
