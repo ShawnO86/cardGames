@@ -113,7 +113,7 @@ button.newCard {
     opacity: 0;
 }
 
-button.deal {
+.btn {
     width: 12rem;
     padding: 10px;
 }

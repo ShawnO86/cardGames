@@ -1,74 +1,105 @@
 class Card {
-    constructor(suit, rank, value, id) {
+    constructor(suit, rank) {
         this.suit = suit;
         this.rank = rank;
-        this.value = value;
-        this.id = id;
     }
 }
 
 class Deck {
     constructor() {
         this.cards = [];
-    }
-    //builds standard deck
+    };
+
+    //builds a standard deck
     createDeck() {
         let suits = ['C', 'D', 'H', 'S'];
         let ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-        let values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 1];
-        let id;
         for (let i = 0; i < suits.length; i++) {
             for (let j = 0; j < ranks.length; j++) {
-                id = suits[i].charAt(0) + ranks[j];
-                this.cards.push(new Card(suits[i], ranks[j], values[j], id));
+                this.cards.push(new Card(suits[i], ranks[j]));
             }
         }
-    }
-    //builds hand
-    getCards(handSize) {
-        let hand = [];
-        for (let i = 0; i < handSize; i++) {
-            //splice 1 randomly selected card and push to hand array
-            hand.push(this.cards.splice(Math.floor(Math.random() * this.cards.length), 1)[0])
+    };
+
+    //shuffles deck
+    shuffle() {
+        let currentIndex = this.cards.length, temporaryValue, randomIndex;
+        while (0 !== currentIndex) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            temporaryValue = this.cards[currentIndex];
+            this.cards[currentIndex] = this.cards[randomIndex];
+            this.cards[randomIndex] = temporaryValue;
         }
-        return hand
-    }
+    };
+
+    //shuffle deck and deal card popped from deck
+    deal() {
+        return this.cards.pop()
+    };
 }
 
 class Player {
     constructor(name) {
         this.playerName = name;
         this.playerCards = [];
-    }
-}
+    };
+
+    addCard(card) {
+        this.playerCards.push(card)
+    };
+
+    //sum hand values
+    calcTotal() {
+        let points = 0;
+        let hasAce = false;
+        for (let i = 0; i < this.playerCards.length; i++) {
+            let card = this.playerCards[i];
+            if (card.rank === 'A') {
+                hasAce = true;
+            } else if (card.rank === 'J' || card.rank === 'Q' || card.rank === 'K') {
+                points += 10;
+            } else {
+                points += Number(card.rank);
+            }
+        }
+        if (hasAce) {
+            if (points + 11 <= 21) {
+                points += 11;
+            } else {
+                points += 1;
+            }
+        }
+        return points;
+    };
+
+};
 
 class Table {
     constructor() {
-        this.cardsInMiddle = [];
         this.players = [];
         this.deck = []
-    }
-    //initial match
-    start(playerOneName, playerTwoName) {
-        this.players.push(new Player(playerOneName));
-        this.players.push(new Player(playerTwoName));
-        let d = new Deck();
-        d.createDeck();
-        this.deck = d;
-        this.players[0].playerCards = d.getCards(5);
-        this.players[1].playerCards = d.getCards(5);
-    }
-    //sum hand values
-    calcTotal(hand) {
-        let currentValue;
-        let total = 0;
-        for (let i = 0; i < hand.length; i++) {
-            currentValue = hand[i].value;
-            total += currentValue;
-            console.log('card ' + i + ': ' + currentValue, total)
+    };
+
+    //initialize match
+    start(playerOneName, playerTwoName, handSize) {
+        let player = new Player(playerOneName);
+        let dealer = new Player(playerTwoName)
+        this.players.push(player);
+        this.players.push(dealer);
+        let deck = new Deck();
+        deck.createDeck();
+        console.log("deck before deal", deck)
+        this.deck = deck;
+        deck.shuffle();
+      //  console.log("after shuffle", this.deck)
+        console.log('start:', player, dealer)
+        for (let i = 0; i < handSize; i++) {
+            player.addCard(deck.deal());
+            dealer.addCard(deck.deal());
         }
-        return total
-    }
+    };
+
     //changes suit letter to corresponding icon
     suitIcon(cardSuit) {
         let suitIcon;
@@ -87,19 +118,20 @@ class Table {
                 break;
         }
         return suitIcon;
-    }
+    };
+
     //renders hand to browser
     renderHand(hand, playerName) {
         console.log(`renderHand args: Hand size: ${hand.length}, Player name: ${playerName}`)
 
         const dealerHandHolder = document.querySelector('.dealerHand')
         const playerHandHolder = document.querySelector('.playerHand')
-        //reset handHolders if they have content
+        //reset handHolders if they already have content
         if (!playerHandHolder.innerHTML == '' && !dealerHandHolder.innerHTML == '') {
             console.log('childs')
             playerHandHolder.innerHTML = '';
             dealerHandHolder.innerHTML = '';
-        }
+        };
 
         console.log('player hand:')
         for (let i = 0; i < hand.length; i++) {
@@ -110,8 +142,6 @@ class Table {
             //build each card by suit and rank
             let cardSuit = hand[i].suit;
             let cardFace = hand[i].rank;
-            button.innerHTML = "New Card";
-            button.classList.add("newCard", cardSuit + cardFace, playerName);
             console.log(cardFace, cardSuit)
 
             cardHolder.classList.add("cardHolder");
@@ -147,45 +177,44 @@ class Table {
                 //bottom of card
                 card.innerHTML += `<div class="card-value-suit bot"> <span>${cardFace}</span> <span>${this.suitIcon(cardSuit)}</span></div>`;
                 cardHolder.appendChild(card)
-            }
-
-            //need new card function here
-            cardHolder.appendChild(button);
-            button.addEventListener('click', () => {
-                //gameArea.innerHTML = ''
-                console.log(button.classList[1], "clicked")
-            })
-
-            //append card to holder
+            };
+            //append cardholder to handholder
             if (playerName === "Dealer") {
                 dealerHandHolder.appendChild(cardHolder)
             }
             else {
                 playerHandHolder.appendChild(cardHolder)
             }
-        }
+        };
     }
 
 }
 
 const gameArea = document.querySelector(".gameArea");
 function main() {
-    let gameBoard = new Table();
+
     const dealButton = document.querySelector('.deal');
 
 
-    let playerHand = [];
-    let dealerHand = []
+
     dealButton.addEventListener("click", () => {
+        let gameBoard = new Table();
         //start match
-        gameBoard.start('Player', 'Dealer');
+        gameBoard.start('Player', 'Dealer', 2);
         //define starting hands
-        playerHand = gameBoard.players[0].playerCards;
-        dealerHand = gameBoard.players[1].playerCards;
+        let player = gameBoard.players[0];
+        let dealer = gameBoard.players[1]
+
         //render hands to browser
-        gameBoard.renderHand(playerHand, gameBoard.players[0].playerName);
-        gameBoard.renderHand(dealerHand, gameBoard.players[1].playerName);
-        console.log("remaining cards in deck: ", gameBoard.deck)
+        gameBoard.renderHand(player.playerCards, player.playerName);
+        gameBoard.renderHand(dealer.playerCards, dealer.playerName);
+        console.log("deck after deal: ", gameBoard.deck)
+        console.log(player.playerName + " hand: " + player.calcTotal())
+        console.log(dealer.playerName + " hand: " + dealer.calcTotal())
+        player.addCard(gameBoard.deck.deal(gameBoard.deck))
+        console.log(player.playerName + " hand: " + player.calcTotal())
+        gameBoard.renderHand(player.playerCards, player.playerName);
+        gameBoard.renderHand(dealer.playerCards, dealer.playerName);
     })
 }
 
