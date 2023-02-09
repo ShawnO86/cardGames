@@ -7,6 +7,24 @@ main {
     width: fit-content;
 }
 
+.gameArea {
+    display: grid;
+    grid-template-areas: 
+    "dealer"
+    "player";
+    gap: 2rem;
+}
+
+.playerHand {
+    display: flex;
+    grid-area: player;
+}
+
+.dealerHand {
+    display: flex;
+    grid-area: dealer;
+}
+
 .card {
     width: 200px;
     height: 280px;
@@ -73,10 +91,7 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-}
-
-.hand:last-of-type {
-    margin-bottom: 5rem;
+    margin: 1rem;
 }
 
 .cardHolder {
@@ -85,17 +100,6 @@ main {
 
 .newCard {
     display: inline-block;
-}
-
-.player {
-    text-align: center;
-    background-color: #333;
-    color: #fff;
-    margin: 1rem 0 5px 0;
-    padding: 1rem;
-    border-radius: 5px;
-    font-weight: 600;
-    font-size: 1.25rem;
 }
 
 button.newCard {
