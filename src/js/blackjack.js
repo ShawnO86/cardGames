@@ -1,5 +1,5 @@
-import { Card, Deck, Player, Table } from "./oopCards.js";
-Card, Deck, Player, Table
+import { Table } from "./oopCards.js";
+
 function blackjack() {
     //main ui elements
     const dealButton = document.querySelector('.deal');

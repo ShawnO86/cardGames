@@ -190,4 +190,4 @@ class Table {
     }
 };
 
-export {Card, Deck, Player, Table}
+export {Table}
