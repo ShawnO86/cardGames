@@ -1,6 +1,9 @@
 # cardGames
 
 This is a work in progress.
+--to get it working on your machine:
+--build: npm run build
+--dev server: npm run dev
 
 Currently, the application will create a 52 card deck as an array and deal seven cards from it for two players.
 
