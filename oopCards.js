@@ -77,13 +77,15 @@ class Table {
         let deck = new Deck();
         deck.createDeck();
         this.deck = deck;
-        console.log("deck before deal", deck)
-        console.log('start:', player, dealer)
         for (let i = 0; i < handSize; i++) {
             player.addCard(deck.deal());
             dealer.addCard(deck.deal());
         }
-        console.log("deck after deal", deck)
+        this.players.forEach((player) => {
+            this.renderInitialHands(player)
+        })
+        console.log('start:\n',player, dealer)
+        console.log('remaining cards: ', deck)
     };
 
     //changes suit letter to corresponding icon
@@ -119,7 +121,7 @@ class Table {
         }
         //loop over hand array
         for (let i = 0; i < hand.length; i++) {
-            //ui elements
+            //ui elements        
             const cardHolder = document.createElement("div");
             cardHolder.classList.add("cardHolder");
             //build each card by suit and rank
@@ -133,8 +135,8 @@ class Table {
             else {
                 playerHandHolder.appendChild(cardHolder)
             }
-        }
-    };
+        };
+    }
 
     newCard(player) {
         //player = gameBoard.players[0];
@@ -163,6 +165,7 @@ class Table {
         const cardDiv = document.createElement("div");
         const suitDisp = document.createElement("div");
         cardDiv.classList.add("card", 'in_animation', suit, face);
+
         if (face === 'A' || face === 'K' || face === 'Q' || face === 'J') {
             //face card render
             cardDiv.innerHTML =
@@ -183,11 +186,11 @@ class Table {
             cardDiv.innerHTML += `<div class="card-value-suit bot"> <span>${face}</span> <span>${this.suitIcon(suit)}</span></div>`;
         }
         return cardDiv
-    };
+    }
 };
 
-//main app
-function main() {
+//main app blackjack
+function blackjack() {
     //main ui elements
     const dealButton = document.querySelector('.deal');
     const hitButton = document.querySelector('.hit');
@@ -208,7 +211,7 @@ function main() {
     let dealer;
     let playerScore;
     let dealerScore;
-    
+
     //start game and deal initial hand on click "deal"
     dealButton.addEventListener("click", () => {
         hitButton.disabled = false;
@@ -224,12 +227,10 @@ function main() {
         gameBoard.start('Player', 'Dealer', 2);
         player = gameBoard.players[0];
         dealer = gameBoard.players[1];
-        //render hands to browser
-        gameBoard.renderInitialHands(player);
-        gameBoard.renderInitialHands(dealer);
         //calculate scores
         playerScore = player.calcTotal();
         dealerScore = dealer.calcTotal();
+        console.log(player.playerName + " hand score: " + playerScore);
         console.log(dealer.playerName + " hand score: " + dealerScore);
         //player score win condition - natural 21
         if (playerScore === 21 && dealerScore < 21) {
@@ -257,7 +258,7 @@ function main() {
             stayButton.classList.add('winButton')
         }
         else if (playerScore > 21) {
-            playerScoreArea.innerHTML = `${playerScore} Bust! Deal again.`;
+            playerScoreArea.innerHTML = `${playerScore} You bust! Deal again.`;
             hitButton.disabled = true;
             hitButton.classList.add('greyOut')
             stayButton.classList.add('greyOut')
@@ -268,4 +269,4 @@ function main() {
     })
 };
 
-main();
+blackjack();

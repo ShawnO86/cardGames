@@ -11,134 +11,25 @@
 
 
 <body>
-    <h1>JavaScript arrays, DOM manipulation, & CSS practice project using playing cards</h1>
-    <h2>( work in progress )</h2>
-    <button class="deal">Deal Cards</button>
-    <script>
+    <h1>JavaScript arrays, OOP, DOM manipulation, & CSS practice project using playing cards</h1>
+    <h2>Blackjack 21 - ( work in progress )</h2>
+    <p>Number on card = point value</p>
+    <p>Face card = 10 points</p>
+    <p>Ace card = 1 point or 11 points depending on total</p>
+    <button class="deal btn">Deal Cards</button>
 
-
-        let deck;
-        const main = document.createElement("main");
-        cardGame();
-
-
-        function cardGame() {
-            document.body.appendChild(main);
-            document.querySelector('.deal').addEventListener("click", () => {
-                //reset play
-                deck = getCards();
-                main.innerHTML = '';
-
-                // Deal cards to each player
-                let dealer = getHand(5);
-                let player = getHand(5);
-
-                console.log(dealer, player, deck)
-                
-                updateUI(dealer)
-                updateUI(player)
-
-                const newCardButtons = document.querySelectorAll('.newCard');
-
-                main.scrollIntoView({
-                    block: "start",
-                    behavior: "smooth"
-                })
-            })
-        }
-
-        //Use of icon based on suit value
-        function suitIcon(cardSuit) {
-            let suitIcon;
-            switch (cardSuit) {
-                case 'H':
-                    suitIcon = '&#9829;';
-                    break;
-                case 'D':
-                    suitIcon = '&#9830;';
-                    break;
-                case 'S':
-                    suitIcon = '&#9824;';
-                    break;
-                case 'C':
-                    suitIcon = '&#9827;';
-                    break;
-            }
-            return suitIcon;
-        }
-
-        function updateUI(hand) {
-            const handHolder = document.createElement("div");
-            main.appendChild(handHolder);
-            handHolder.classList.add("hand");
-            //populate handholder div with cards from hand array
-            for (let i = 0; i < hand.length; i++) {
-                let cardSuit = hand[i][0].suit;
-                let cardFace = hand[i][0].face;
-                console.log('Update ui: ', cardSuit, cardFace)
-                const button = document.createElement("button");
-                const card = document.createElement("div");
-                const cardHolder = document.createElement("div");
-                //card render 
-                card.classList.remove('H', 'D', 'S', 'C');
-                card.classList.add("card", cardSuit, 'in_animation');
-                button.innerHTML = "New Card";
-                button.classList.add("newCard");
-                cardHolder.classList.add("cardHolder");
-                cardHolder.classList.remove("out_animation");
-                //render Face card
-                if (cardFace === 'A' || cardFace === 'K' || cardFace === 'Q' || cardFace === 'J') {
-                    card.innerHTML =
-                        `<div class="card-value-suit top"> <span>${cardFace}</span> <span>${suitIcon(cardSuit)}</span></div>
-                    <div class="card-suit"> ${cardFace} </div>
-                    <div class="card-value-suit bot"> <span>${cardFace}</span> <span>${suitIcon(cardSuit)}</span></div>`;
-                    cardHolder.appendChild(card)
-                } else {
-                    //render Number card with amount of icons based on value
-                    const suitDisp = document.createElement("div");
-                    suitDisp.classList.add("card-suit");
-                    //top of card
-                    card.innerHTML = `<div class="card-value-suit top"> <span>${cardFace}</span> <span>${suitIcon(cardSuit)}</span></div>`;
-                    //add icons to icon holder div based on card value
-                    for (let i = 0; i < Number(cardFace); i++) {
-                        suitDisp.innerHTML += `<span>${suitIcon(cardSuit)}</span>`;
-                    };
-                    //append icons to middle of card
-                    card.appendChild(suitDisp);
-                    //bottom of card
-                    card.innerHTML += `<div class="card-value-suit bot"> <span>${cardFace}</span> <span>${suitIcon(cardSuit)}</span></div>`;
-                    cardHolder.appendChild(card)
-                }
-                cardHolder.appendChild(button);
-                handHolder.appendChild(cardHolder);
-            }
-        }
-
-        function getHand(handSize) {
-            let hand = [];
-            //pull 7 random cards from deck and remove those from the deck 
-            for (let i = 0; i < handSize; i++) {
-                //splice 1 randomly selected card and push to hand array
-                hand.push(deck.splice(Math.floor(Math.random() * deck.length), 1));
-            }
-            return hand;
-        }
-
-        //generate deck
-        function getCards() {
-            const suits = new Array('H', 'D', 'S', 'C');
-            const faces = new Array('2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A');
-            const cards = [];
-            //each suit add in face
-            for (let i = 0; i < suits.length; i++) {
-                //push suit and face to deck
-                for (let j = 0; j < faces.length; j++) {
-                    const suit = suits[i];
-                    const face = faces[j];
-                    cards.push({ suit, face });
-                }
-            }
-            return cards;
-        }
-    </script>
+    <div class="gameArea">
+        <div class="playerArea">
+            <h3>Player</h3>
+            <div class="playerHand"></div>
+            <div class="buttonHolder">
+            <button class="hit btn">Hit</button>
+            <button class="stay btn">Stay</button>
+        </div></div>
+        <div class="dealerArea">
+            <h3>Dealer</h3>
+            <div class="dealerHand"></div>
+        </div>
+    </div>
+    <script src="oopCards.js"></script>
 </body>

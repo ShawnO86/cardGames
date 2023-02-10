@@ -7,6 +7,77 @@ main {
     width: fit-content;
 }
 
+.hiddenArea {
+    display: none;
+}
+
+.gameArea {
+    display: grid;
+    grid-template-areas: 
+    "player"
+    "dealer";
+    gap: 2rem;
+    width: 100%;
+}
+
+.btn {
+    width: 12rem;
+    padding: 10px;
+    margin: 1rem;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: rgb(250, 235, 215);
+}
+
+.btn:hover {
+    background-color: #ccc;
+    color: #000;
+}
+
+.greyOut {
+    background-color:rgb(173, 16, 48);
+    color: #333;
+    cursor: not-allowed;
+}
+
+.greyOut:hover {
+    background-color:rgb(173, 16, 48);
+}
+
+.winButton {
+    background-color: rgb(4, 95, 4);
+    color: #fff;
+    box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.25);
+}
+
+.winButton:hover {
+    background-color: rgb(122, 172, 47);
+    color: #333;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+}
+
+.playerArea {
+    grid-area: player;
+    margin: 1rem auto 0 auto;
+}
+
+.dealerArea {
+    grid-area: dealer;
+    margin: 0 auto 1rem auto;
+}
+
+.playerHand, .dealerHand {
+    display: flex;
+}
+
+.dealerHand .cardHolder:first-child .card:first-child {
+    background-color: rgb(51, 51, 51);
+    color: rgba(51, 51, 51, 0);
+}
+
 .card {
     width: 200px;
     height: 280px;
@@ -34,6 +105,18 @@ main {
     transform: rotate(180deg);
     border-radius: 5px 5px 0 0;
     background-color: rgb(230, 230, 230);
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-value-suit.bot .cardRadios {
+    transform: rotate(180deg);
+}
+
+.card-value-suit.A button {
+    position: relative;
+    left: 120px;
+    transform: rotate(180deg);
 }
 
 .card-suit {
@@ -43,60 +126,29 @@ main {
     justify-content: space-around;
     padding: 16px 38px;
     gap: 5px;
-
 }
 
-.card.S,
-.card.C {
+.card-suit.A, .card-suit.K, .card-suit.Q, .card-suit.J {
+    font-size: 5rem;
+}
+
+.card.S, .card.C {
     color: black;
 }
 
-.card.H,
-.card.D {
+.card.H, .card.D {
     color: red;
 }
 
 .hand {
     display: flex;
     flex-wrap: wrap;
-    justify-content: left;
-}
-
-.hand:last-of-type {
-    margin-bottom: 5rem;
+    justify-content: center;
+    margin: 1rem;
 }
 
 .cardHolder {
     margin: 5px;
-}
-
-.newCard {
-    display: inline-block;
-}
-
-.player {
-    text-align: center;
-    background-color: #333;
-    color: #fff;
-    margin: 1rem 0 5px 0;
-    padding: 1rem;
-    border-radius: 5px;
-    font-weight: 600;
-    font-size: 1.25rem;
-}
-
-button.newCard {
-    width: 99%;
-    padding: 10px;
-    margin-top: 5px;
-    white-space: nowrap;
-    animation: animated-card-in 300ms ease-in 50ms forwards;
-    opacity: 0;
-}
-
-button.deal {
-    width: 12rem;
-    padding: 10px;
 }
 
 .out_animation {
