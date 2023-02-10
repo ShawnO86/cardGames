@@ -2,8 +2,8 @@ class Card {
     constructor(suit, rank) {
         this.suit = suit;
         this.rank = rank;
-    }
-}
+    };
+};
 
 class Deck {
     constructor() {
@@ -24,13 +24,14 @@ class Deck {
     deal() {
         return this.cards.splice(Math.floor(Math.random() * this.cards.length), 1)[0];
     };
-}
+};
 
 class Player {
     constructor(name) {
         this.playerName = name;
         this.playerCards = [];
     };
+
     //give new card on hit
     addCard(card) {
         this.playerCards.push(card)
@@ -106,55 +107,25 @@ class Table {
     };
 
     //renders hand to browser
-    renderHand(hand, playerName) {
+    renderInitialHands(player) {
         const dealerHandHolder = document.querySelector('.dealerHand')
         const playerHandHolder = document.querySelector('.playerHand')
-        let handLength = hand.length;
+        let hand = player.playerCards;
+        let playerName = player.playerName;
         //reset handHolders if they already have content
         if (!playerHandHolder.innerHTML == '' && !dealerHandHolder.innerHTML == '') {
             playerHandHolder.innerHTML = '';
             dealerHandHolder.innerHTML = '';
-        };
+        }
         //loop over hand array
-        for (let i = 0; i < handLength; i++) {
+        for (let i = 0; i < hand.length; i++) {
             //ui elements
             const cardHolder = document.createElement("div");
-            const card = document.createElement("div");
-            //number card, to display multiple suit icons based on value
-            const suitDisp = document.createElement("div");
+            cardHolder.classList.add("cardHolder");
             //build each card by suit and rank
             let cardSuit = hand[i].suit;
             let cardFace = hand[i].rank;
-            //card classes reset
-            cardHolder.classList.add("cardHolder");
-            card.classList.remove('H', 'D', 'S', 'C', 'A', 'K', 'Q', 'J');
-            card.classList.add("card", 'in_animation');
-            //check if face card
-            if (cardFace === 'A' || cardFace === 'K' || cardFace === 'Q' || cardFace === 'J') {
-                //set card class
-                card.classList.add(cardSuit, cardFace)
-                //face card render
-                card.innerHTML =
-                    `<div class="card-value-suit top"> <span>${cardFace}</span> <span>${this.suitIcon(cardSuit)}</span></div>
-                <div class="card-suit ${cardFace}"> ${cardFace} </div>
-                <div class="card-value-suit bot"><span>${cardFace}</span> <span>${this.suitIcon(cardSuit)}</span></div>`;
-                cardHolder.appendChild(card);
-            } else {
-                //set card class
-                card.classList.add(cardSuit, cardFace)
-                suitDisp.classList.add("card-suit", cardFace);
-                //top of card
-                card.innerHTML = `<div class="card-value-suit top"> <span>${cardFace}</span> <span>${this.suitIcon(cardSuit)}</span></div>`;
-                //dynamiclly add icons to number card based on it's value
-                for (let i = 0; i < Number(cardFace); i++) {
-                    suitDisp.innerHTML += `<span>${this.suitIcon(cardSuit)}</span>`;
-                };
-                //append icons to middle of card
-                card.appendChild(suitDisp);
-                //render bottom of card
-                card.innerHTML += `<div class="card-value-suit bot"> <span>${cardFace}</span> <span>${this.suitIcon(cardSuit)}</span></div>`;
-                cardHolder.appendChild(card)
-            };
+            cardHolder.appendChild(this.renderCard(cardSuit, cardFace));
             //append cardholder to handholder
             if (playerName === "Dealer") {
                 dealerHandHolder.appendChild(cardHolder)
@@ -162,10 +133,59 @@ class Table {
             else {
                 playerHandHolder.appendChild(cardHolder)
             }
-        };
-    }
+        }
+    };
 
-}
+    newCard(player) {
+        //player = gameBoard.players[0];
+        //dealer = gameBoard.players[1];
+        //player data
+        const cardHolder = document.createElement("div");
+        const dealerHandHolder = document.querySelector('.dealerHand')
+        const playerHandHolder = document.querySelector('.playerHand')
+        const playerName = player.playerName;;
+        const card = this.deck.deal();
+        const cardSuit = card.suit;
+        const cardFace = card.rank;
+        cardHolder.classList.add("cardHolder");
+        player.addCard(card)
+        cardHolder.appendChild(this.renderCard(cardSuit, cardFace));
+        //check if face card
+        if (playerName === "Dealer") {
+            dealerHandHolder.appendChild(cardHolder)
+        }
+        else {
+            playerHandHolder.appendChild(cardHolder)
+        }
+    };
+
+    renderCard(suit, face) {
+        const cardDiv = document.createElement("div");
+        const suitDisp = document.createElement("div");
+        cardDiv.classList.add("card", 'in_animation', suit, face);
+        if (face === 'A' || face === 'K' || face === 'Q' || face === 'J') {
+            //face card render
+            cardDiv.innerHTML =
+                `<div class="card-value-suit top"> <span>${face}</span> <span>${this.suitIcon(suit)}</span></div>
+                        <div class="card-suit ${face}"> ${face} </div>
+                        <div class="card-value-suit bot"><span>${face}</span> <span>${this.suitIcon(suit)}</span></div>`;
+        } else {
+            suitDisp.classList.add("card-suit", face);
+            //top of card
+            cardDiv.innerHTML = `<div class="card-value-suit top"> <span>${face}</span> <span>${this.suitIcon(suit)}</span></div>`;
+            //dynamiclly add icons to number card based on it's value
+            for (let i = 0; i < Number(face); i++) {
+                suitDisp.innerHTML += `<span>${this.suitIcon(suit)}</span>`;
+            };
+            //append icons to middle of card
+            cardDiv.appendChild(suitDisp);
+            //render bottom of card
+            cardDiv.innerHTML += `<div class="card-value-suit bot"> <span>${face}</span> <span>${this.suitIcon(suit)}</span></div>`;
+        }
+        return cardDiv
+    };
+};
+
 //main app
 function main() {
     //main ui elements
@@ -176,6 +196,8 @@ function main() {
     const playerArea = document.querySelector(".playerArea");
     const dealerArea = document.querySelector(".dealerArea");
     const playerScoreArea = document.createElement('p');
+    const dealerHandHolder = document.querySelector('.dealerHand')
+    const playerHandHolder = document.querySelector('.playerHand')
     gameArea.classList.remove('gameArea')
     gameArea.classList.add('hiddenArea');
     playerScoreArea.classList.add('scoreArea')
@@ -186,12 +208,15 @@ function main() {
     let dealer;
     let playerScore;
     let dealerScore;
+    
     //start game and deal initial hand on click "deal"
     dealButton.addEventListener("click", () => {
         hitButton.disabled = false;
         hitButton.classList.remove('greyOut')
         stayButton.classList.remove('winButton')
         stayButton.classList.remove('greyOut')
+        playerHandHolder.innerHTML = ''
+        dealerHandHolder.innerHTML = ''
         gameArea.classList.remove('hiddenArea')
         gameArea.classList.add('gameArea')
         gameBoard = new Table();
@@ -200,8 +225,8 @@ function main() {
         player = gameBoard.players[0];
         dealer = gameBoard.players[1];
         //render hands to browser
-        gameBoard.renderHand(player.playerCards, player.playerName);
-        gameBoard.renderHand(dealer.playerCards, dealer.playerName);
+        gameBoard.renderInitialHands(player);
+        gameBoard.renderInitialHands(dealer);
         //calculate scores
         playerScore = player.calcTotal();
         dealerScore = dealer.calcTotal();
@@ -217,17 +242,13 @@ function main() {
             playerScoreArea.innerHTML = `Your current score: ${playerScore}`;
         };
     });
-    //new card on click "hit"
 
+    //new card on click "hit"
     hitButton.addEventListener("click", () => {
-        //give player another card
-        player.addCard(gameBoard.deck.deal());
+        //give player another card & update UI
+        gameBoard.newCard(player)
         //update player score
         playerScore = player.calcTotal();
-        //update hands/cards display
-        gameBoard.renderHand(player.playerCards, player.playerName);
-        gameBoard.renderHand(dealer.playerCards, dealer.playerName);
-
         //win & lose conditions
         if (playerScore === 21) {
             playerScoreArea.innerHTML = 'Blackjack 21!';
@@ -245,7 +266,6 @@ function main() {
             playerScoreArea.innerHTML = `Your current score: ${playerScore}`;
         }
     })
-
-}
+};
 
 main();
