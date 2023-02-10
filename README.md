@@ -21,13 +21,11 @@ To Do:
 
 -Add face card images.
 
--Hide dealer cards.
+-Hide dealers first card until player 'stays'.
 
--Create scoring system.
+-After player stays, dealer will automaticlly hit or stay based on score
 
 -Add a win animation.
-
--Slow down speed at which you can click new cards - maybe unable to click new card if animation is playing?
 
 -???
 
