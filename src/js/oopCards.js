@@ -85,7 +85,7 @@ class Table {
         this.players.forEach((player) => {
             this.renderInitialHands(player)
         })
-        console.log('start:\n',player, dealer)
+        console.log('start:\n', player, dealer)
         console.log('remaining cards: ', deck)
     };
 
@@ -166,13 +166,20 @@ class Table {
         const cardDiv = document.createElement("div");
         const suitDisp = document.createElement("div");
         cardDiv.classList.add("card", 'in_animation', suit, face);
-
+        //face card render
         if (face === 'A' || face === 'K' || face === 'Q' || face === 'J') {
-            //face card render
-            cardDiv.innerHTML =
-                `<div class="card-value-suit top"> <span>${face}</span> <span>${this.suitIcon(suit)}</span></div>
+            if (face === 'A') {
+                cardDiv.innerHTML =
+                    `<div class="card-value-suit top"> <span>${face}</span> <span>${this.suitIcon(suit)}</span></div>
+                        <div class="card-suit ${suit} ${face}"> ${this.suitIcon(suit)} </div>
+                        <div class="card-value-suit bot"><span>${face}</span> <span>${this.suitIcon(suit)}</span></div>`;
+            } else {
+                cardDiv.innerHTML =
+                    `<div class="card-value-suit top"> <span>${face}</span> <span>${this.suitIcon(suit)}</span></div>
                         <div class="card-suit ${face}"> ${face} </div>
                         <div class="card-value-suit bot"><span>${face}</span> <span>${this.suitIcon(suit)}</span></div>`;
+            }
+            //number card render
         } else {
             suitDisp.classList.add("card-suit", face);
             //top of card
@@ -190,4 +197,4 @@ class Table {
     }
 };
 
-export {Table}
+export { Table }
