@@ -85,8 +85,8 @@ class Table {
         this.players.forEach((player) => {
             this.renderInitialHands(player)
         })
-        console.log('start:\n', player, dealer)
-        console.log('remaining cards: ', deck)
+        //console.log('start:\n', player, dealer)
+        console.log('card counting: ', deck)
     };
 
     //changes suit letter to corresponding icon
@@ -129,7 +129,7 @@ class Table {
             //build each card by suit and rank
             let cardSuit = hand[i].suit;
             let cardFace = hand[i].rank;
-            if(player.playerName === "Dealer" && i === 0) {
+            if (player.playerName === "Dealer" && i === 0) {
                 isFirstDealer = true;
             }
             cardHolder.appendChild(this.renderCard(cardSuit, cardFace, isFirstDealer));
@@ -171,8 +171,8 @@ class Table {
     renderCard(suit, face, isFirstDealer) {
         const cardDiv = document.createElement("div");
         const suitDisp = document.createElement("div");
-        if(isFirstDealer == true) {
-            cardDiv.classList.add("flipCard", 'in_animation', suit, face); 
+        if (isFirstDealer == true) {
+            cardDiv.classList.add("flipCard", 'in_animation', suit, face);
         }
         cardDiv.classList.add("card", 'in_animation', suit, face);
         //face card render
@@ -203,22 +203,6 @@ class Table {
             cardDiv.innerHTML += `<div class="card-value-suit bot"> <span>${face}</span> <span>${this.suitIcon(suit)}</span></div>`;
         }
         return cardDiv
-    }
-    decideWinner() {
-        const player = this.players[0];
-        const dealer = this.players[1];
-        const playerScore = player.calcTotal();
-        const dealerScore = dealer.calcTotal();
-        //ect..
-        if(playerScore === 21 && dealerScore < 21) {
-            console.log("decide winner, player wins!: ", playerScore, dealerScore);
-        } else if(playerScore === 21 && dealerScore === 21) {
-            console.log("decide winner, Push.")
-        } else if(playerScore > dealerScore) {
-            console.log("decide winner, player wins!: ", playerScore, dealerScore);
-        } else if(playerScore < dealerScore) {
-            console.log("decide winner, dealer wins!: ", playerScore, dealerScore);
-        }
     }
 };
 

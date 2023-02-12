@@ -2,14 +2,6 @@
 
 This is a work in progress.
 
---to get it working on your machine:
-
---install package: npm i
-
---build: npm run build
-
---dev server: npm run dev
-
 Currently, the application will create a 52 card deck as an array and deal seven cards from it for two players.
 
 Each card in the deck array is an object representing each {suit, face}.
@@ -25,15 +17,32 @@ Each card in the hand array is able to be traded out for another in the deck arr
 
 As the cards are switched out an animation will play that shows the removed card leaving the hand and the new card entering.
 
+Most of the data is handled using objects, which include:
+
+Card{suit, face}
+&#8595
+Deck{cards[]}
+&#8595
+Player{playerName, playerCards[]}
+&#8595
+Table{players[], deck[]}
+
 To Do:
 
--Add face card images.
-
--Hide dealers first card until player 'stays'.
-
--After player stays, dealer will automaticlly hit or stay based on score
+-Add face card (King, Queen & Jack) images.
 
 -Add a win animation.
 
 -???
+
+____________________________________
+
+
+--To get it working on your machine:
+
+--install package: npm i
+
+--build: npm run build
+
+--dev server: npm run dev
 

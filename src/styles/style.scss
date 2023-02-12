@@ -324,7 +324,7 @@ main {
     }
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 800px) {
     :root {
         font-size: 12px;
     }
@@ -348,7 +348,11 @@ main {
 
     .reDeal {
         margin: auto;
-        width: 10rem;
+        width: 7rem;
+        position: absolute;
+        left: calc(50% - 3.5rem);
+        bottom: calc(50% + 3.5rem);
+        font-size: 1rem;
     }
 
     .bettingArea {
