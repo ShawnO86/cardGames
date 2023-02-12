@@ -20,11 +20,17 @@ As the cards are switched out an animation will play that shows the removed card
 Most of the data is handled using objects, which include:
 
 Card{suit, face}
-&#8595
+
+&#8595;
+
 Deck{cards[]}
-&#8595
+
+&#8595;
+
 Player{playerName, playerCards[]}
-&#8595
+
+&#8595;
+
 Table{players[], deck[]}
 
 To Do:
