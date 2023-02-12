@@ -85,8 +85,6 @@ class Table {
         this.players.forEach((player) => {
             this.renderInitialHands(player)
         })
-        //console.log('start:\n', player, dealer)
-        console.log('card counting: ', deck)
     };
 
     //changes suit letter to corresponding icon

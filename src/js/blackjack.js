@@ -69,8 +69,7 @@ function main() {
                 stayButton.classList.add('greyOut')
                 stayButton.disabled = true;
                 reDealButton.classList.remove('hiddenArea')
-                findWinner(player, dealer)
-                playerScoreArea.innerHTML = `You bust with ${playerScore}! Dealer wins with ${dealer.calcTotal()}!`;
+                playerScoreArea.innerHTML = `You bust! ${findWinner(player, dealer)}!`;
             } else {
                 //display score
                 playerScoreArea.innerHTML = `Your current score: ${playerScore}`;
