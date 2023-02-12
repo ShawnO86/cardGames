@@ -41,22 +41,18 @@ class Player {
     //sum hand values on stay click
     calcTotal() {
         let points = 0;
-        let hasAce = false;
         for (let i = 0; i < this.playerCards.length; i++) {
             let card = this.playerCards[i];
             if (card.rank === 'A') {
-                hasAce = true;
+                if (points + 11 <= 21) {
+                    points += 11;
+                } else {
+                    points += 1;
+                }
             } else if (card.rank === 'J' || card.rank === 'Q' || card.rank === 'K') {
                 points += 10;
             } else {
                 points += Number(card.rank);
-            }
-        }
-        if (hasAce) {
-            if (points + 11 <= 21) {
-                points += 11;
-            } else {
-                points += 1;
             }
         }
         return points;

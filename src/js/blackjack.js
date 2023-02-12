@@ -14,6 +14,7 @@ function main() {
     const topHeader = document.querySelector('.headArea');
     const dealerScoreNum = document.getElementById('dealerScore')
     const playerScoreNum = document.getElementById('playerScore')
+    const resetScoreButton = document.getElementById('resetScoreButton');
 
     let gameBoard;
     let player;
@@ -86,6 +87,15 @@ function main() {
             playerScoreArea.innerHTML = winner;
             reDealButton.classList.remove('hiddenArea')
         });
+
+        resetScoreButton.addEventListener("click", () => {
+            localStorage.clear("playerWins");
+            localStorage.clear("dealerWins");
+            dealerWins = 0;
+            playerWins = 0;
+            dealerScoreNum.innerHTML = dealerWins;
+            playerScoreNum.innerHTML = playerWins;
+        })
     }
 
     function deal() {
@@ -108,9 +118,6 @@ function main() {
         //calculate scores
         playerScore = player.calcTotal();
         dealerScore = dealer.calcTotal();
-        //console.log(player.playerName + " hand score: " + playerScore);
-        //console.log(dealer.playerName + " hand score: " + dealerScore);
-        //player score win condition - natural 21
         if (playerScore === 21 && dealerScore < 21) {
             playerScoreArea.innerHTML = 'Natural 21! You win!'
             hitButton.disabled = true;
