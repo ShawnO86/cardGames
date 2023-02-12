@@ -10,24 +10,38 @@
 
 
 <body>
+    <div class="headArea">
     <h1 id="topHeader">JavaScript arrays, OOP, DOM manipulation, & CSS practice project using playing cards</h1>
     <h2>Blackjack 21 - ( work in progress )</h2>
     <p>Number on card = point value</p>
     <p>Face card = 10 points</p>
     <p>Ace card = 1 point or 11 points depending on total</p>
     <button class="deal btn">Deal Cards</button>
+</div>
 
     <div class="gameArea">
+        <div class="winsArea">
+            <fieldset>
+                <legend>Scores:</legend>
+                <div id="playerScore">Player: <span>0</span></div>
+                <div id="dealerScore">Dealer: <span>0</span></div>
+            </fieldset>
+        </div>
+        <div class="dealerArea">
+            <div class="dealerHand"></div>
+            <h3>Dealer</h3>
+            <button class="reDeal btn hiddenArea">Deal Again?</button>
+        </div>
+        <p class="scoreArea"></p>
         <div class="playerArea">
             <h3>Player</h3>
             <div class="playerHand"></div>
             <div class="buttonHolder">
-            <button class="hit btn">Hit</button>
-            <button class="stay btn">Stay</button>
-        </div></div>
-        <div class="dealerArea">
-            <h3>Dealer</h3>
-            <div class="dealerHand"></div>
+                <button class="hit btn">Hit</button>
+                <button class="stay btn">Stay</button>
+            </div>
         </div>
+        
     </div>
+
 </body>

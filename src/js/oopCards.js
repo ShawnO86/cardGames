@@ -38,7 +38,7 @@ class Player {
         this.playerCards.push(card)
     };
 
-    //sum hand values on stay
+    //sum hand values on stay click
     calcTotal() {
         let points = 0;
         let hasAce = false;
@@ -66,7 +66,7 @@ class Player {
 class Table {
     constructor() {
         this.players = [];
-        this.deck = []
+        this.deck = [];
     };
 
     //initialize match
@@ -123,12 +123,16 @@ class Table {
         //loop over hand array
         for (let i = 0; i < hand.length; i++) {
             //ui elements        
+            let isFirstDealer = false;
             const cardHolder = document.createElement("div");
             cardHolder.classList.add("cardHolder");
             //build each card by suit and rank
             let cardSuit = hand[i].suit;
             let cardFace = hand[i].rank;
-            cardHolder.appendChild(this.renderCard(cardSuit, cardFace));
+            if(player.playerName === "Dealer" && i === 0) {
+                isFirstDealer = true;
+            }
+            cardHolder.appendChild(this.renderCard(cardSuit, cardFace, isFirstDealer));
             //append cardholder to handholder
             if (playerName === "Dealer") {
                 dealerHandHolder.appendChild(cardHolder)
@@ -137,6 +141,8 @@ class Table {
                 playerHandHolder.appendChild(cardHolder)
             }
         };
+        //flip first card dealer is dealt
+
     }
 
     newCard(player) {
@@ -162,9 +168,12 @@ class Table {
         }
     };
 
-    renderCard(suit, face) {
+    renderCard(suit, face, isFirstDealer) {
         const cardDiv = document.createElement("div");
         const suitDisp = document.createElement("div");
+        if(isFirstDealer == true) {
+            cardDiv.classList.add("flipCard", 'in_animation', suit, face); 
+        }
         cardDiv.classList.add("card", 'in_animation', suit, face);
         //face card render
         if (face === 'A' || face === 'K' || face === 'Q' || face === 'J') {
@@ -194,6 +203,22 @@ class Table {
             cardDiv.innerHTML += `<div class="card-value-suit bot"> <span>${face}</span> <span>${this.suitIcon(suit)}</span></div>`;
         }
         return cardDiv
+    }
+    decideWinner() {
+        const player = this.players[0];
+        const dealer = this.players[1];
+        const playerScore = player.calcTotal();
+        const dealerScore = dealer.calcTotal();
+        //ect..
+        if(playerScore === 21 && dealerScore < 21) {
+            console.log("decide winner, player wins!: ", playerScore, dealerScore);
+        } else if(playerScore === 21 && dealerScore === 21) {
+            console.log("decide winner, Push.")
+        } else if(playerScore > dealerScore) {
+            console.log("decide winner, player wins!: ", playerScore, dealerScore);
+        } else if(playerScore < dealerScore) {
+            console.log("decide winner, dealer wins!: ", playerScore, dealerScore);
+        }
     }
 };
 
