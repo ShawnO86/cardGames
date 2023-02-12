@@ -13,9 +13,7 @@ After the hand array is built it is rendered to the browser with a look of actua
 
 The 5 has 5 icons 10 has 10 icons ect... Face cards are represented by their first letter A, K, Q, J.
 
-Each card in the hand array is able to be traded out for another in the deck array with the click of a button. As they are traded out, they are swaped from hand array to deck array and vise versa using .splice() and .push().
-
-As the cards are switched out an animation will play that shows the removed card leaving the hand and the new card entering.
+As new cards are added to the hand an animation will play that shows the new card entering.
 
 Most of the data is handled using objects, which include:
 
