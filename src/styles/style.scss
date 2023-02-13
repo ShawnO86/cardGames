@@ -19,6 +19,25 @@ main {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    .deal {
+        margin: 1rem 0;
+        animation: 2s ease-in infinite animated-glow-border;
+        box-shadow: 0px 0px 10px 3px rgba(168, 168, 168, 0.25);
+        width: calc(9rem - 10px);
+        padding: 0.3125rem 0;
+        cursor: pointer;
+        border: 2px solid rgb(250, 235, 215);
+        border-radius: 5px;
+        background-color: #333;
+        color: rgb(250, 235, 215);
+
+        &:hover {
+            border: 2px solid rgb(210, 252, 186);
+            box-shadow: 0px 0px 10px 3px rgba(168, 168, 168, 0.25);
+            color: #fff;
+            background-color: #222;
+        }
+    }
 }
 
 .hiddenArea {
@@ -57,215 +76,189 @@ main {
         }
     }
 
-}
+    .playerArea,
+    .dealerArea {
+        margin: 1rem auto 0 auto;
+        background-color: rgba(51, 51, 51, .25);
+        padding: 1rem 0;
+        border-radius: 5px;
+        border: 2px solid #8d7c1f;
+        width: 80%;
+        box-sizing: border-box;
 
-.winsArea {
-    position: relative;
-    padding: 0.625rem 0 0 0;
-
-    fieldset {
-        display: flex;
-        justify-content: center;
-        gap: calc(1vw + 0.3125rem);
-        border: none;
-
-        #resetScoreButton {
-            width: 9rem;
+        h3 {
+            background-color: rgba(51, 51, 51, .25);
+            padding: 0.5rem;
         }
 
-        //betting buttons 
-        div {
-            background-color: rgba(0, 0, 0, 0.55);
-            padding: 0.3125rem;
-            border-radius: 0.3125rem;
-            width: 4.5rem;
+        .playerHand,
+        .dealerHand {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-    }
-}
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0 1vw;
 
-.btn {
-    width: 9rem;
-    padding: 0.3125rem 0;
-    cursor: pointer;
-    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.3);
-    border: 2px solid rgb(250, 235, 215);
-    border-radius: 5px;
-    background-color: #333;
-    color: rgb(250, 235, 215);
+            .cardHolder {
+                margin: 0;
 
-    &:hover {
-        border: 2px solid rgb(210, 252, 186);
-        box-shadow: 0px 0px 10px 3px rgba(168, 168, 168, 0.25);
-        color: #fff;
-        background-color: #222;
-    }
-}
+                .card {
+                    margin: 10px -15px;
+                    width: 9rem;
+                    height: 12rem;
+                    border-radius: 5px;
+                    border: 1px solid #333;
+                    box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.35);
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    background-color: #ececec;
+                }
 
-.buttonHolder {
-    display: flex;
-    justify-content: center;
-    gap: calc(1vw + 0.625rem);
-    margin: 1rem 0 0 0;
-}
+                //dealers first card before flip
+                .flipCard {
+                    width: 9rem;
+                    height: 12rem;
+                    border-radius: 5px;
+                    border: 1px solid #333;
+                    box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.35);
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    background: radial-gradient(circle, rgb(20, 71, 167) 5%, rgb(6, 44, 100) 90%);
 
-.greyOut {
-    background-color: rgb(173, 16, 48);
-    color: #333;
-    cursor: not-allowed;
+                    .card-value-suit,
+                    .card-value-suit.bot,
+                    .card-suit {
+                        display: none;
+                    }
+                }
 
-    &:hover {
-        background-color: rgb(173, 16, 48);
-    }
-}
+                .card-value-suit {
+                    display: flex;
+                    gap: 5px;
+                    font-size: 1.25rem;
+                    background-color: rgb(230, 230, 230);
+                    border-bottom: 1px dotted rgba(51, 51, 51, .5);
+                    border-radius: 5px 5px 0 0;
+                    padding: 0.15rem 0 0 0.35rem;
 
-.winButton {
-    background-color: rgb(4, 95, 4);
-    color: #fff;
-    box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.25);
+                    span {
+                        padding: 0.2rem 0rem 0.2rem 0.35rem;
+                    }
 
-    &:hover {
-        background-color: rgb(122, 172, 47);
-        color: #333;
-        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
-    }
-}
+                }
 
-.deal {
-    margin: 1rem 0;
-    animation: 2s ease-in 500ms infinite animated-glow-border;
-    box-shadow: 0px 0px 10px 3px rgba(168, 168, 168, 0.25);
-}
+                .card-value-suit.bot {
+                    transform: rotate(180deg);
+                }
 
+                .card-suit {
+                    font-size: 1.5rem;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-around;
+                    padding: 0.625rem 2rem;
+                    gap: 0.3rem 0.15rem;
+                }
 
-.playerArea {
-    margin: 1rem auto 0 auto;
-    background-color: rgba(51, 51, 51, .25);
-    padding: 1rem 0;
-    border-radius: 5px;
-    border: 2px solid #8d7c1f;
-    width: 80%;
-    box-sizing: border-box;
+                .card-suit.A {
+                    position: relative;
+                    font-size: 5rem;
+                    padding: 0;
+                }
 
-    h3 {
-        background-color: rgba(51, 51, 51, .25);
-        padding: 0.5rem;
-    }
-}
+                .card-suit.K,
+                .card-suit.Q,
+                .card-suit.J {
+                    font-size: 3rem;
+                }
 
-.dealerArea {
-    margin: 0.625rem auto 0 auto;
-    background-color: rgba(51, 51, 51, .25);
-    border-radius: 5px;
-    border: 2px solid #8d7c1f;
-    width: 80%;
-    box-sizing: border-box;
+                .card.S,
+                .card.C {
+                    color: black;
+                }
 
-    h3 {
-        background-color: rgba(51, 51, 51, .25);
-        padding: 0.5rem;
-    }
-}
+                .card.H,
+                .card.D {
+                    color: red;
+                }
+            }
 
-.playerHand,
-.dealerHand {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0 1vw;
-}
-
-.cardHolder {
-    margin: 0;
-
-    .card {
-        margin: 10px -15px;
-        width: 9rem;
-        height: 12rem;
-        border-radius: 5px;
-        border: 1px solid #333;
-        box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.35);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        background-color: #ececec;
-    }
-
-    //dealers first card before flip
-    .flipCard {
-        width: 9rem;
-        height: 12rem;
-        border-radius: 5px;
-        border: 1px solid #333;
-        box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.35);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        background: radial-gradient(circle, rgb(20, 71, 167) 5%, rgb(6, 44, 100) 90%);
-
-        .card-value-suit,
-        .card-value-suit.bot,
-        .card-suit {
-            display: none;
+            .buttonHolder {
+                display: flex;
+                justify-content: center;
+                gap: calc(1vw + 0.625rem);
+                margin: 1rem 0 0 0;
+            }
         }
     }
 
-    .card-value-suit {
-        display: flex;
-        gap: 5px;
-        font-size: 1.25rem;
-        background-color: rgb(230, 230, 230);
-        border-bottom: 1px dotted rgba(51, 51, 51, .5);
-        border-radius: 5px 5px 0 0;
-        padding: 0.15rem 0 0 0.35rem;
-        span {
-            padding: 0.2rem 0rem 0.2rem 0.35rem;
-        }
-
-    }
-
-    .card-value-suit.bot {
-        transform: rotate(180deg);
-    }
-
-    .card-suit {
-        font-size: 1.5rem;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        padding: 0.625rem 2rem;
-        gap: 0.3rem 0.15rem;
-    }
-
-    .card-suit.A {
+    .winsArea {
         position: relative;
-        font-size: 5rem;
-        padding: 0;
+        padding: 0.625rem 0 0 0;
+
+        fieldset {
+            display: flex;
+            justify-content: center;
+            gap: calc(1vw + 0.3125rem);
+            border: none;
+
+            #resetScoreButton {
+                width: 9rem;
+            }
+
+            //betting buttons 
+            div {
+                background-color: rgba(0, 0, 0, 0.55);
+                padding: 0.3125rem;
+                border-radius: 0.3125rem;
+                width: 4.5rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
     }
 
-    .card-suit.K,
-    .card-suit.Q,
-    .card-suit.J {
-        font-size: 3rem;
+    .btn {
+        width: calc(9rem - 10px);
+        padding: 0.3125rem 0;
+        cursor: pointer;
+        box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.3);
+        border: 2px solid rgb(250, 235, 215);
+        border-radius: 5px;
+        background-color: #333;
+        color: rgb(250, 235, 215);
+
+        &:hover {
+            border: 2px solid rgb(210, 252, 186);
+            box-shadow: 0px 0px 10px 3px rgba(168, 168, 168, 0.25);
+            color: #fff;
+            background-color: #222;
+        }
     }
 
-    .card.S,
-    .card.C {
-        color: black;
+    .greyOut {
+        background-color: rgb(173, 16, 48);
+        color: #333;
+        cursor: not-allowed;
+
+        &:hover {
+            background-color: rgb(173, 16, 48);
+        }
     }
 
-    .card.H,
-    .card.D {
-        color: red;
-    }
-}
+    .winButton {
+        background-color: rgb(4, 95, 4);
+        color: #fff;
+        box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.25);
 
-.hand {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+        &:hover {
+            background-color: rgb(122, 172, 47);
+            color: #333;
+            box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+        }
+    }
 }
 
 .out_animation {
@@ -332,111 +325,234 @@ main {
     :root {
         font-size: 12px;
     }
-
-    .btn {
-        width: 7rem;
-        padding: 0.315 0px;
-        box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
-        border: 1px solid rgb(250, 235, 215);
-        font-size: 0.9rem;
+    .headArea {
+        padding: 1rem;
+        .deal {
+            margin: 2rem 0;
+            width: calc(9rem - 5px);
+            padding: 0.3125rem;    
+        }
     }
 
-    .btn:hover {
-        border: 1px solid rgb(210, 252, 186);
-        box-shadow: 0px 0px 5px 1px rgba(168, 168, 168, 0.25);
-    }
+    .gameArea {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 0;
+        background: radial-gradient(circle, rgb(2, 139, 78) 0%, rgba(0, 81, 44, 1) 82%);
+        color: rgb(255, 255, 255);
+        padding: 0;
+        min-height: 100vh;
 
-    .buttonHolder {
-        gap: 0.35rem;
-        margin: 0.5rem 0 0 0;
-    }
+        .centerArea {
+            display: grid;
 
-    .bettingArea {
-        position: relative;
-        bottom: 0;
-        padding: 1rem 0 0 0;
+            .reDeal {
+                position: relative;
+                animation: 2s ease-in 0ms infinite animated-glow-border;
+                height: fit-content;
+                grid-area: 1/1;
+                top: -4rem;
+                margin: auto;
+                padding: 0.5rem 2rem;
+                width: fit-content;
+            }
 
-        fieldset {
-            text-align: center;
-            flex-direction: row;
-            margin: auto;
-            justify-content: center;
-
-            //betting buttons 
-            div {
-                background-color: rgba(0, 0, 0, 0.55);
-                padding: 0.625rem 0.315rem;
-                border-radius: 5px;
-                width: 3rem;
+            .scoreArea {
+                background-color: rgba(51, 51, 51, .25);
+                padding: 0.5rem;
+                margin: 1rem 0 0 0;
+                grid-area: 1/1;
             }
         }
-    }
 
-    .playerArea {
-        margin: 0.75rem auto 0 auto;
-        padding: 0.5rem 0;
-        border: 1px solid #8d7c1f;
-        width: 90%;
-
-        h3 {
-            padding: 0.25rem;
-        }
-
-        .scoreArea {
-            padding: 0.25rem;
-        }
-    }
-
-    .dealerArea {
-        margin: 0.75rem auto 0 auto;
-        padding: 0.5rem 0 0 0;
-        border: 1px solid #8d7c1f;
-        width: 90%;
-
-        h3 {
-            background-color: rgba(51, 51, 51, .35);
-            padding: 0.5rem;
+        .playerArea,
+        .dealerArea {
+            margin: 1rem auto 0 auto;
+            background-color: rgba(51, 51, 51, .25);
+            padding: 1rem 0;
             border-radius: 5px;
+            border: 2px solid #8d7c1f;
+            width: 80%;
+            box-sizing: border-box;
+
+            h3 {
+                background-color: rgba(51, 51, 51, .25);
+                padding: 0.5rem;
+            }
+
+            .playerHand,
+            .dealerHand {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0 1vw;
+
+                .cardHolder {
+                    margin: 0;
+
+                    .card {
+                        margin: 10px -15px;
+                        width: 9rem;
+                        height: 12rem;
+                        border-radius: 5px;
+                        border: 1px solid #333;
+                        box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.35);
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        background-color: #ececec;
+                    }
+
+                    //dealers first card before flip
+                    .flipCard {
+                        width: 9rem;
+                        height: 12rem;
+                        border-radius: 5px;
+                        border: 1px solid #333;
+                        box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.35);
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        background: radial-gradient(circle, rgb(20, 71, 167) 5%, rgb(6, 44, 100) 90%);
+
+                        .card-value-suit,
+                        .card-value-suit.bot,
+                        .card-suit {
+                            display: none;
+                        }
+                    }
+
+                    .card-value-suit {
+                        display: flex;
+                        gap: 5px;
+                        font-size: 1.25rem;
+                        background-color: rgb(230, 230, 230);
+                        border-bottom: 1px dotted rgba(51, 51, 51, .5);
+                        border-radius: 5px 5px 0 0;
+                        padding: 0.15rem 0 0 0.35rem;
+
+                        span {
+                            padding: 0.2rem 0rem 0.2rem 0.35rem;
+                        }
+                    }
+
+                    .card-value-suit.bot {
+                        transform: rotate(180deg);
+                    }
+
+                    .card-suit {
+                        font-size: 1.5rem;
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: space-around;
+                        padding: 0.625rem 2rem;
+                        gap: 0.3rem 0.15rem;
+                    }
+
+                    .card-suit.A {
+                        position: relative;
+                        font-size: 5rem;
+                        padding: 0;
+                    }
+
+                    .card-suit.K,
+                    .card-suit.Q,
+                    .card-suit.J {
+                        font-size: 3rem;
+                    }
+
+                    .card.S,
+                    .card.C {
+                        color: black;
+                    }
+
+                    .card.H,
+                    .card.D {
+                        color: red;
+                    }
+                }
+
+                .buttonHolder {
+                    display: flex;
+                    justify-content: center;
+                    gap: calc(1vw + 0.625rem);
+                    margin: 1rem 0 0 0;
+                }
+            }
         }
-    }
 
-    .cardHolder {
-        margin: 0;
-
-        .card {
-            width: 7.5rem;
-            height: 10.5rem;
-            box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.35);
-        }
-
-        .card-value-suit {
-            gap: 0.15rem;
-            padding: 0.05rem ;
-            font-size: 0.9rem;
-        }
-
-        .card-suit {
-            font-size: 0.75rem;
-            padding: 0.15rem 0.9rem;
-            gap: 0.15rem 0.15rem;
-        }
-
-        .card-suit.A {
+        .winsArea {
             position: relative;
-            font-size: 4rem;
-            padding: 0;
+            padding: 0.625rem 0 0 0;
+
+            fieldset {
+                display: flex;
+                justify-content: center;
+                gap: calc(1vw + 0.3125rem);
+                border: none;
+
+                #resetScoreButton {
+                    width: 9rem;
+                }
+
+                //betting buttons 
+                div {
+                    background-color: rgba(0, 0, 0, 0.55);
+                    padding: 0.3125rem;
+                    border-radius: 0.3125rem;
+                    width: 4.5rem;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+            }
         }
 
-        .card-suit.K,
-        .card-suit.Q,
-        .card-suit.J {
-            font-size: 3rem;
+        .btn {
+            width: calc(9rem - 10px);
+            padding: 0.3125rem 0;
+            cursor: pointer;
+            box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgb(250, 235, 215);
+            border-radius: 5px;
+            background-color: #333;
+            color: rgb(250, 235, 215);
+
+            &:hover {
+                border: 2px solid rgb(210, 252, 186);
+                box-shadow: 0px 0px 10px 3px rgba(168, 168, 168, 0.25);
+                color: #fff;
+                background-color: #222;
+            }
+        }
+
+        .greyOut {
+            background-color: rgb(173, 16, 48);
+            color: #333;
+            cursor: not-allowed;
+
+            &:hover {
+                background-color: rgb(173, 16, 48);
+            }
+        }
+
+        .winButton {
+            background-color: rgb(4, 95, 4);
+            color: #fff;
+            box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.25);
+
+            &:hover {
+                background-color: rgb(122, 172, 47);
+                color: #333;
+                box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+            }
         }
     }
 
     @keyframes animated-card-out {
         0% {
-            width: 7.5rem;
+            width: 9rem;
             opacity: 1;
             margin: 0;
 
@@ -464,7 +580,7 @@ main {
         100% {
             overflow: visible;
             white-space: normal;
-            width: 7.5rem;
+            width: 9rem;
             opacity: 1;
         }
     }
