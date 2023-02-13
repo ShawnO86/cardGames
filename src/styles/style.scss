@@ -61,12 +61,12 @@ main {
 
 .winsArea {
     position: relative;
-    padding: 10px 0 0 0;
+    padding: 0.625rem 0 0 0;
 
     fieldset {
         display: flex;
         justify-content: center;
-        gap: calc(1vw + 5px);
+        gap: calc(1vw + 0.3125rem);
         border: none;
 
         #resetScoreButton {
@@ -76,8 +76,8 @@ main {
         //betting buttons 
         div {
             background-color: rgba(0, 0, 0, 0.55);
-            padding: 5px;
-            border-radius: 5px;
+            padding: 0.3125rem;
+            border-radius: 0.3125rem;
             width: 4.5rem;
             display: flex;
             justify-content: space-between;
@@ -88,7 +88,7 @@ main {
 
 .btn {
     width: 9rem;
-    padding: 5px 0;
+    padding: 0.3125rem 0;
     cursor: pointer;
     box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.3);
     border: 2px solid rgb(250, 235, 215);
@@ -107,7 +107,7 @@ main {
 .buttonHolder {
     display: flex;
     justify-content: center;
-    gap: calc(1vw + 10px);
+    gap: calc(1vw + 0.625rem);
     margin: 1rem 0 0 0;
 }
 
@@ -156,7 +156,7 @@ main {
 }
 
 .dealerArea {
-    margin: 10px auto 0 auto;
+    margin: 0.625rem auto 0 auto;
     background-color: rgba(51, 51, 51, .25);
     border-radius: 5px;
     border: 2px solid #8d7c1f;
@@ -178,7 +178,7 @@ main {
 }
 
 .cardHolder {
-    margin: 10px -15px;
+    margin: 0;
 
     .card {
         margin: 10px -15px;
@@ -215,22 +215,19 @@ main {
     .card-value-suit {
         display: flex;
         gap: 5px;
-        padding: 3px 5px;
         font-size: 1.25rem;
-    }
-
-    .card-value-suit.top {
-        border-radius: 5px 5px 0 0;
         background-color: rgb(230, 230, 230);
+        border-bottom: 1px dotted rgba(51, 51, 51, .5);
+        border-radius: 5px 5px 0 0;
+        padding: 0.15rem 0 0 0.35rem;
+        span {
+            padding: 0.2rem 0rem 0.2rem 0.35rem;
+        }
+
     }
 
     .card-value-suit.bot {
         transform: rotate(180deg);
-        border-radius: 5px 5px 0 0;
-        background-color: rgb(230, 230, 230);
-        display: flex;
-        gap: 5px;
-        padding: 3px 5px;
     }
 
     .card-suit {
@@ -238,8 +235,8 @@ main {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
-        padding: 10px 32px;
-        gap: 5px 3px;
+        padding: 0.625rem 2rem;
+        gap: 0.3rem 0.15rem;
     }
 
     .card-suit.A {
@@ -285,7 +282,6 @@ main {
         width: 9rem;
         opacity: 1;
         margin: 0;
-
     }
 
     100% {
@@ -339,7 +335,7 @@ main {
 
     .btn {
         width: 7rem;
-        padding: 5px 0px;
+        padding: 0.315 0px;
         box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
         border: 1px solid rgb(250, 235, 215);
         font-size: 0.9rem;
@@ -369,7 +365,7 @@ main {
             //betting buttons 
             div {
                 background-color: rgba(0, 0, 0, 0.55);
-                padding: 7px 5px;
+                padding: 0.625rem 0.315rem;
                 border-radius: 5px;
                 width: 3rem;
             }
@@ -414,20 +410,15 @@ main {
         }
 
         .card-value-suit {
-            gap: 3px;
-            padding: 1px 3px;
-            font-size: 1rem;
-        }
-
-        .card-value-suit.bot {
-            gap: 3px;
-            padding: 1px 3px;
+            gap: 0.15rem;
+            padding: 0.05rem ;
+            font-size: 0.9rem;
         }
 
         .card-suit {
             font-size: 1.25rem;
             padding: 5px 16px;
-            gap: 3px 1px;
+            gap: 0.15rem 0.05rem;
         }
 
         .card-suit.A {
