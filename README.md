@@ -15,7 +15,7 @@ The 5 has 5 icons 10 has 10 icons ect... Face cards are represented by their fir
 
 As new cards are added to the hand an animation will play that shows the new card entering.
 
-Most of the data is handled using objects, which include:
+Most of the data is handled using objects of custom classes, which include:
 
 Card{suit, face}
 
