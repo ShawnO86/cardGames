@@ -138,7 +138,6 @@ function main() {
             //display players score
             playerScoreArea.innerHTML = `Player current score: ${playerScore}`;
         };
-        gameArea.scrollIntoView({ behavior: "smooth", block: "end" })
     }
 
     function findWinner(player1, player2) {
