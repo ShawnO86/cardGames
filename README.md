@@ -2,7 +2,7 @@
 
 This is a work in progress.
 
-Currently, the application will create a 52 card deck as an array and deal seven cards from it for two players.
+Currently, the application will create a 52 card deck as an array and deal two cards from it for two players.
 
 Each card in the deck array is an object representing each {suit, face}.
 Every card dealt is removed from the deck array and pushed to a hand array.
