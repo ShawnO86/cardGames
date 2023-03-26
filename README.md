@@ -1,52 +1,17 @@
-# cardGames
-
-This is a work in progress.
-
-Currently, the application will create a 52 card deck as an array and deal seven cards from it for two players.
-
-Each card in the deck array is an object representing each {suit, face}.
-Every card dealt is removed from the deck array and pushed to a hand array.
-
-For each suit there are icons associated with them. The icons are the HTML entities for the related suit: &#9824; &#9827; &#9830; &#9829;
-
-After the hand array is built it is rendered to the browser with a look of actual playing cards. 
-
-The 5 has 5 icons 10 has 10 icons ect... Face cards are represented by their first letter A, K, Q, J.
-
-As new cards are added to the hand an animation will play that shows the new card entering.
-
-Most of the data is handled using objects of custom classes, which include:
-
-Card{suit, face}
-
-&#8595;
-
-Deck{cards[]}
-
-&#8595;
-
-Player{playerName, playerCards[]}
-
-&#8595;
-
-Table{players[], deck[]}
-
-To Do:
-
--Add face card (King, Queen & Jack) images.
-
--Add a win animation.
-
--???
-
-____________________________________
+# JavaScript Blackjack 21
 
 
---To get it working on your machine:
+### Technologies Used 
 
---install package: npm i
+* JavaScript (ES6)
+* SASS
+* Webpack
 
---build: npm run build
+### Structure 
 
---dev server: npm run dev
+To create this project I used object-oriented programming principes to structure the codebase. 
 
+* The Player class represents a player in the game and contains the methods for drawing and calculating values of cards for scoring the hand.
+* The Card class represents a single card and contains the constructors for suit and rank.
+* The Deck class represents the all the cards in an array. It contains the constructor and methods for shuffling(using the Fisher-Yates shuffle algorithm) and dealing.
+* The Table class represents the board and holds the constructor for the remaining cards in the deck as well as the players(player, dealer). It also contains the methods for starting the game loop using the other classes, labeling the suits of cards with an HTML entity (&#9824; &#9827; &#9830; &#9829;), and updating the UI with cards on the board. 
