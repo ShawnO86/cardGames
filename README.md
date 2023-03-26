@@ -1,6 +1,5 @@
 # JavaScript Blackjack 21
-
-
+=======
 ### Technologies Used 
 
 * JavaScript (ES6)
