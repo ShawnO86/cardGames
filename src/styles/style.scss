@@ -196,30 +196,28 @@ main {
 
     .winsArea {
         position: relative;
-        padding: 0.625rem 0 0 0;
+        padding: 1rem 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: calc(1vw + 0.3125rem);
+        border: none;
 
-        fieldset {
+        #resetScoreButton {
+            width: 9rem;
+            padding: 0.625rem 0.3125rem;
+        }
+
+        div {
+            background-color: rgba(0, 0, 0, 0.55);
+            padding: 0.625rem 0.5rem;
+            border-radius: 0.3125rem;
+            width: 4.5rem;
+            height: fit-content;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            gap: calc(1vw + 0.3125rem);
-            border: none;
-
-            #resetScoreButton {
-                width: 9rem;
-                padding: 0.625rem 0.3125rem;
-            }
-
-            div {
-                background-color: rgba(0, 0, 0, 0.55);
-                padding: 0.625rem 0.5rem;
-                border-radius: 0.3125rem;
-                width: 4.5rem;
-                height: fit-content;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
         }
     }
 

@@ -62,7 +62,7 @@ class Player {
 class Table {
     constructor() {
         this.players = [];
-        this.deck = [];
+        this.deck = new Deck();
     };
 
     //initialize match
@@ -71,12 +71,10 @@ class Table {
         const dealer = new Player(playerTwoName)
         this.players.push(player);
         this.players.push(dealer);
-        let deck = new Deck();
-        deck.createDeck();
-        this.deck = deck;
+        this.deck.createDeck();
         for (let i = 0; i < handSize; i++) {
-            player.addCard(deck.deal());
-            dealer.addCard(deck.deal());
+            player.addCard(this.deck.deal());
+            dealer.addCard(this.deck.deal());
         }
         this.players.forEach((player) => {
             this.renderInitialHands(player)
@@ -135,13 +133,9 @@ class Table {
                 playerHandHolder.appendChild(cardHolder)
             }
         };
-        //flip first card dealer is dealt
-
     }
 
     newCard(player) {
-        //player = gameBoard.players[0];
-        //dealer = gameBoard.players[1];
         //player data
         const cardHolder = document.createElement("div");
         const dealerHandHolder = document.querySelector('.dealerHand')
@@ -153,7 +147,6 @@ class Table {
         cardHolder.classList.add("cardHolder");
         player.addCard(card)
         cardHolder.appendChild(this.renderCard(cardSuit, cardFace));
-        //check if face card
         if (playerName === "Dealer") {
             dealerHandHolder.appendChild(cardHolder)
         }
